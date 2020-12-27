@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    "bazelbuild.vscode-bazel",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "davidanson.vscode-markdownlint",
+    "heptio.jsonnet",
+    "ldcf4.jumpprotobuf",
+    "mike-co.import-sorter",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "rebornix.project-snippets",
+    "stkb.rewrap",
+    "streetsidesoftware.code-spell-checker",
+    "swindh.enumerator",
+    "teamchilla.blueprint",
+    "wmaurer.change-case",
+    "xaver.clang-format",
+    "zxh404.vscode-proto3"
+  ]
+}

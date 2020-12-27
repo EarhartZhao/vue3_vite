@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    // ...// 其他配置
+    "baseUrl": ".",
+    "target": "es2020",
+    "module": "ESNext",
+    "sourceMap": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": ["element-plus", "axios"],
+    "paths": {
+      "@/*": ["src/*"],
+      "@img/*": ["src/assets/img/*"]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/types/images.d.ts",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

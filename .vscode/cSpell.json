@@ -1,0 +1,62 @@
+// cSpell Settings
+{
+    // Version of the setting file.  Always 0.1
+    "version": "0.1",
+    // language - current active spelling language
+    "language": "en",
+    // words - list of words to be always considered correct
+    "words": [
+      "ACLID",
+      "ACLs",
+      "Msrp",
+      "Nanos",
+      "Pricings",
+      "RPCID",
+      "Rdata",
+      "Tulei",
+      "Wdata",
+      "Wodata",
+      "bson",
+      "golang",
+      "gopkg",
+      "grpc",
+      "gtin",
+      "mongodb",
+      "proto",
+      "protobuf",
+      "ptypes",
+      "uuid",
+      "kk",
+      "inversify",
+      "appender",
+      "appenders",
+      "keepalive",
+      "numerify",
+      "middlewares",
+      "antd",
+      "typesafe",
+      "geekblue",
+      "unmount",
+      "bodyparser",
+      "mixins",
+      "stylelint",
+      "globby",
+      "scrollbars",
+      "hlwyyjrpt",
+      "Validateble",
+      "chunkize",
+
+      "backcfg",
+      "botdef",
+      "botcom",
+      "botclient",
+      "botserver",
+      "henryleu",
+      "placeholder"
+
+    ],
+    // flagWords - list of words to be always considered incorrect
+    // This is useful for offensive words and common spelling errors.
+    // For example "hte" should be "the"
+    "flagWords": ["hte"]
+  }

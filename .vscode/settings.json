@@ -1,0 +1,109 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": false,
+    "source.fixAll": true
+  },
+  "editor.formatOnSave": true,
+  "editor.renderControlCharacters": true,
+  "editor.tabSize": 2,
+  "cSpell.diagnosticLevel": "Hint",
+  "eslint.enable": true,
+  "eslint.packageManager": "yarn",
+  "eslint.options": {
+    "extensions": [
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ]
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "bazel-*": true,
+    "**/node_modules": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.watcherExclude": {
+    "**/_bazel_*/**": true
+  },
+  "search.exclude": {
+    ".log": true,
+    "**/bower_components": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/coverage": true
+  },
+  "clang-format.language.javascript.enable": false,
+  "clang-format.language.typescript.enable": false,
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "preferences.importModuleSpecifier": "non-relative",
+    // "tsdk": "node_modules/typescript/lib",
+    "referencesCodeLens.enabled": true
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "go.formatTool": "goreturns",
+  "go.formatFlags": [
+    "-local",
+    "kk/"
+  ],
+  // "typescript.format.enable": true,
+  // "typescript.preferences.importModuleSpecifier": "non-relative",
+  // "typescript.tsdk": "node_modules/typescript/lib",
+  // "typescript.referencesCodeLens.enabled": true,
+  "blueprint.templatesPath": [
+    "console/.blueprint-templates"
+  ],
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 10000,
+  "importSorter.importStringConfiguration.hasSemicolon": false,
+  "importSorter.sortConfiguration.importPaths.order": "lowercaseLast",
+  "importSorter.sortConfiguration.importMembers.order": "lowercaseFirst",
+  "importSorter.sortConfiguration.customOrderingRules.rules": [
+    {
+      "type": "importMember",
+      "regex": "^$",
+      "orderLevel": 10,
+      "disableSort": true
+    },
+    {
+      "regex": "^@",
+      "orderLevel": 20
+    },
+    {
+      "regex": "^kk/",
+      "orderLevel": 30
+    },
+    {
+      "regex": "^\\.",
+      "orderLevel": 40
+    }
+  ]
+}
