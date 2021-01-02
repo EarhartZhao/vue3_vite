@@ -1,4 +1,5 @@
 import 'element-plus/lib/theme-chalk/index.css'
+import '/@/assets/styles/index.scss' // 全局css
 import './router/permission'
 
 // import axios from "axios";

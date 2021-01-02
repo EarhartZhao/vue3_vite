@@ -1,12 +1,12 @@
 export const baseRouters = [
   {
     path: "/",
-    name: "Home",
-    component: () => import("/@/views/Home.vue"),
+    name: "Login",
+    component: () => import("/@/views/base/login/index.vue"),
   },
   {
     path: "/lifeCycle",
     name: "lifeCycle",
-    component: () => import("/@/views/LifeCycle.vue"),
+    component: () => import("/@/views/base/LifeCycle.vue"),
   },
 ];
