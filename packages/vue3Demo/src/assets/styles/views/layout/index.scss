@@ -1,0 +1,33 @@
+@use '../index.scss';
+
+.scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.layout {
+  .el-header {
+    @extend .h-60,
+    .w-f;
+  }
+
+  .layout_box {
+    // @extend ;
+    height: calc(100vh - 60px);
+
+    .el-aside {
+      @extend .h-f,
+      .scroll;
+      border: 1px solid;
+      width: 180px !important;
+    }
+
+    .el-main {
+      width: calc(100% - 180px);
+      @extend .h-f,
+      .pd-0,
+      .scroll;
+    }
+  }
+
+}

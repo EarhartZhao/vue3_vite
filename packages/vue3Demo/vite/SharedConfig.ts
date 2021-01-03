@@ -1,16 +1,11 @@
-import { join } from 'path'
+// import { join } from 'path'
 import { SharedConfig } from 'vite'
 
-const pathResolve = (dir: string) => {
-  return join(__dirname, dir);
-};
+import { aliasOptions } from './options/aliasOptions'
 
 export const share_config: SharedConfig = {
   root: process.cwd(),
-  alias: {
-    // "/@/": pathResolve("src/"),
-    "/@/": join(__dirname, "src/"),
-  },
+  alias: aliasOptions,
   /**
    * Project root directory. Can be an absolute path, or a path relative from
    * the location of the config file itself.

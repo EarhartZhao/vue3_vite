@@ -1,0 +1,8 @@
+@use '../export/index.scss';
+
+main,
+.main {
+  @extend .relative,
+  .h-vh-100,
+  .w-vw-100;
+}

@@ -1,10 +1,11 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <div>header</div>
 </template>
 
 <script>
+import "/@styleLayout/header/index.scss";
 export default {
-  name: "HelloWorld",
+  name: "Header",
   data() {
     return {
       msg: "home",
@@ -12,8 +13,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-h1 {
-  font-size: 30px;
-}
-</style>
