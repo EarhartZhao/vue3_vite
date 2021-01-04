@@ -3,7 +3,7 @@ import { ServerConfig } from 'vite'
 export const server_config: ServerConfig = {
   hostname: "localhost",
   port: 9527,
-  open: true,
+  open: false,
   /**
    * Configure hmr websocket connection.
    */

@@ -5,7 +5,15 @@ const pathResolve = (dir: string) => join(__dirname, dir);
 const options = [
   {
     key: "@",
-    values: "src/",
+    values: "src",
+  },
+  {
+    key: "@comp",
+    values: "src/components",
+  },
+  {
+    key: "@icon",
+    values: "src/assets/iconfont",
   },
 
   /* styles */

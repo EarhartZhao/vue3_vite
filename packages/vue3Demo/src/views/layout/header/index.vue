@@ -1,5 +1,8 @@
 <template>
-  <div>header</div>
+  <div>
+    <i class="iconfont icon-operating"></i>
+    <Icon icon="icon-cache"></Icon>
+  </div>
 </template>
 
 <script>

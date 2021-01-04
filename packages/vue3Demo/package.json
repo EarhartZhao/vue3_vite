@@ -14,7 +14,7 @@
     "vue-router": "^4.0.1"
   },
   "devDependencies": {
-    "@types/node": "^14.14.16",
+    "@types/node": "^14.14.19",
     "@vue/compiler-sfc": "^3.0.4",
     "sass": "1.30",
     "vite": "^1.0.0-rc.13"
