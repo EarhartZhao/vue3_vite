@@ -1,0 +1,42 @@
+@use '../export/index.scss';
+
+.ImageBox {
+  @extend .w-50,
+  .h-50,
+  .relative;
+
+  img {
+    @extend .w-f,
+    .h-f,
+    .block;
+  }
+}
+
+.ImageDialog {
+  @extend .w-f,
+  .h-f,
+  .absolute,
+  .l-0,
+  .t-0;
+  z-index: 9;
+
+  img {
+    width: 60%;
+    height: 60%;
+    @extend .absolute;
+    left: 20%;
+    top: 20%;
+  }
+
+  .ImageDialogLoading {
+    background-color: rgba(0, 0, 0, 0.4);
+
+    i {
+      @extend .white,
+      .align-c,
+      .li-f
+    }
+  }
+
+
+}

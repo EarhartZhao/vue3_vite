@@ -1,5 +1,6 @@
 <template>
-  <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
+  <Loading />
+  <!-- <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
     <el-radio-button :label="false">展开</el-radio-button>
     <el-radio-button :label="true">收起</el-radio-button>
   </el-radio-group>
@@ -40,24 +41,28 @@
       <i class="el-icon-setting"></i>
       <template #title>导航四</template>
     </el-menu-item>
-  </el-menu>
+  </el-menu> -->
 </template>
 
 <script>
 import "/@styleLayout/menu/index.scss";
+import Loading from "/@comp/loading";
 export default {
-  data() {
-    return {
-      isCollapse: true,
-    };
+  components: {
+    Loading,
   },
-  methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
-  },
+  // data() {
+  //   return {
+  //     isCollapse: true,
+  //   };
+  // },
+  // methods: {
+  //   handleOpen(key, keyPath) {
+  //     console.log(key, keyPath);
+  //   },
+  //   handleClose(key, keyPath) {
+  //     console.log(key, keyPath);
+  //   },
+  // },
 };
 </script>

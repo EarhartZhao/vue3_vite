@@ -1,6 +1,5 @@
 <template>
-  <i :class="'iconfont ' + icon"></i>
-  1111
+  <i :class="'iconfont icon-' + icon"></i>
 </template>
 
 <script>

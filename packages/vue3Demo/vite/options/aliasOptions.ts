@@ -8,6 +8,10 @@ const options = [
     values: "src",
   },
   {
+    key: "@assets",
+    values: "src/assets",
+  },
+  {
     key: "@comp",
     values: "src/components",
   },

@@ -11,6 +11,7 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "types": ["element-plus", "axios"],
+    "jsx": "preserve",
     "paths": {
       "@/*": ["src/*"],
       "@img/*": ["src/assets/img/*"]
