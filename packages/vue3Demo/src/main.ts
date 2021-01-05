@@ -5,7 +5,7 @@ import './router/permission' //路由守卫
 import '/@comp/index' //组件
 
 //  全局组件
-import Icon from '/@comp/icon.vue'
+import Icon from '/@comp/icon'
 //  end
 // axios.defaults.adapter = require('axios/lib/adapters/http');
 // import axios from "axios";

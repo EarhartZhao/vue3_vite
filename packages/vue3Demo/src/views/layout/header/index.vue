@@ -2,6 +2,7 @@
   <div>
     <i class="iconfont icon-operating"></i>
     <Icon icon="cache" />
+    <Icon icon="cache" />
     <Image />
   </div>
 </template>
