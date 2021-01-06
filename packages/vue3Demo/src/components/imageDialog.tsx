@@ -8,7 +8,8 @@ export default defineComponent({
   props: {
     status: {
       type: String,
-      default: "success", //success, error, loading
+      validator: (val: string) => ["success", "error", "loading"].includes(val),
+      default: "success",
     },
   },
   setup(props) {

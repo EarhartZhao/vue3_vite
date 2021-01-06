@@ -1,13 +1,16 @@
 <template>
   <el-container class="main layout">
     <el-header>
-      <Header></Header>
+      <Header />
     </el-header>
     <el-container class="layout_box">
       <el-aside>
-        <Menu></Menu>
+        <Menu />
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main>
+        <!-- <router-view></router-view> -->
+        <AppMain />
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -16,6 +19,7 @@
 import "/@styleLayout/index.scss";
 import Header from "./header/index.vue";
 import Menu from "./menu/index.vue";
+import AppMain from "./appMain/index";
 export default {
   name: "Index",
   components: {
