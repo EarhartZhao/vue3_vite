@@ -1,6 +1,6 @@
 import '/@style/component/index.scss'
 
-import { defineComponent } from 'vue'
+import { defineComponent, toRefs } from 'vue'
 
 import Logo from '../assets/logo.png'
 import ImageDialog from './imageDialog'
@@ -23,7 +23,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { srcUrl, size, alt } = props;
+    const { srcUrl, size, alt } = toRefs(props);
     const handleSize: any = (size: Array<number>) => {
       let obj: any = {};
       switch (size.length) {

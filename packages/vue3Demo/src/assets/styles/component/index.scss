@@ -30,6 +30,9 @@
 
   .ImageDialogLoading {
     background-color: rgba(0, 0, 0, 0.4);
+    @extend .w-f,
+    .h-f,
+    .flex-c-c;
 
     i {
       @extend .white,

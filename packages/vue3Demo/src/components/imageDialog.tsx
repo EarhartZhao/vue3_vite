@@ -1,7 +1,7 @@
 import '/@style/component/index.scss'
 
 import loadingError from '/@assets/svg/loadingError.svg'
-import { defineComponent } from 'vue'
+import { defineComponent, toRefs } from 'vue'
 
 export default defineComponent({
   name: "ImageDialog",
