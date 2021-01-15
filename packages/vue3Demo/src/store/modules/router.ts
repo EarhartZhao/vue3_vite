@@ -1,17 +1,15 @@
-// initial state
+import stronge from '/@utils/stronge'
+
 const state = {
   all: [],
 };
 
-// getters
 const getters = {};
 
-// actions
 const actions = {
   getAllProducts() {},
 };
 
-// mutations
 const mutations = {
   setProducts() {},
 };

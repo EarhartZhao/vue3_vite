@@ -1,5 +1,7 @@
 ### packgae for vue3 with vite
 
+### vue源码 <https://github.com/vuejs/vue-next>
+
 ### vite文档 <https://vite-design.surge.sh/guide/chinese-doc.html>
 
 ### vueRouter <https://next.router.vuejs.org/>
