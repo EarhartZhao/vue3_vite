@@ -20,6 +20,7 @@ import "/@styleLayout/index.scss";
 import Header from "./header/index.vue";
 import Menu from "./menu/index.vue";
 import AppMain from "./appMain/index";
+import strong from "/@utils/stronge";
 export default {
   name: "Index",
   components: {

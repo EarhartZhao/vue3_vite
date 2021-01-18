@@ -1,10 +1,14 @@
+import storeState from '/@types/store/index'
 import stronge from '/@utils/stronge'
+import { ActionTree, GetterTree, MutationTree, StoreOptions } from 'vuex'
 
-const state = {
-  all: [],
+const state: StoreOptions<storeState> = {
+  routers: [],
 };
 
-const getters = {};
+const getters = {
+  getRouters() {},
+};
 
 const actions = {
   getAllProducts() {},

@@ -8,6 +8,8 @@
 
 ### vuex4 <https://next.vuex.vuejs.org/>
 
+### vuex-class <https://github.com/ktsn/vuex-class>
+
 ### vue3组合式api文档 <https://vue-composition-api-rfc.netlify.com/api.html>
 
 ### elementUI-plus文档 <https://element-plus.gitee.io/#/zh-CN/component/installation>

@@ -12,6 +12,9 @@ export const build_config = {
   terserOptions: {},
   // esbuildTarget:'',
   ssr: false,
+  rollupInputOptions: {
+    external: ["fs", "child_process", "vuex-class", "vuex"],
+  },
 
   /**
    * Entry. Use this to specify a js entry file in use cases where an

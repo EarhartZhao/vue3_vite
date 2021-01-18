@@ -12,6 +12,14 @@ const options = [
     values: "src/assets",
   },
   {
+    key: "@store",
+    values: "src/store",
+  },
+  {
+    key: "@types",
+    values: "src/types",
+  },
+  {
     key: "@utils",
     values: "src/assets/utils",
   },
