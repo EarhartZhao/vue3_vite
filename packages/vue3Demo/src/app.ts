@@ -5,9 +5,9 @@ import { createApp } from 'vue'
 
 import App from './App.vue'
 import router from './router/'
-import store from './store/index'
+import { key, store } from './store/index'
 
-export const app = createApp(App).use(router).use(store);
+export const app = createApp(App).use(router).use(store, key);
 
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {

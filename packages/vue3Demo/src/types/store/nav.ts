@@ -1,1 +1,1 @@
-export default interface nav = {};
+export default interface nav {}
