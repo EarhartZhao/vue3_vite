@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import { baseRouters } from './base'
+import { baseRouters } from './modules/base'
 
 let routes: any = [];
 routes = routes.concat(baseRouters);

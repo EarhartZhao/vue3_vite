@@ -1,5 +1,5 @@
 export interface state {
-  routers?: Array<any>;
+  permissionRouters?: Array<any>;
 }
 export interface getters {
   getRouters(s: state): Array<any>;
