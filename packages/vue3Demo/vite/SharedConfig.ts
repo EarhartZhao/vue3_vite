@@ -6,6 +6,7 @@ import { aliasOptions } from './options/aliasOptions'
 export const share_config: SharedConfig = {
   root: process.cwd(),
   alias: aliasOptions,
+  jsx: "vue",
   /**
    * Project root directory. Can be an absolute path, or a path relative from
    * the location of the config file itself.

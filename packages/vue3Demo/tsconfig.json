@@ -10,12 +10,13 @@
     "noImplicitReturns": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "noImplicitAny": true,
+    "isolatedModules": true,
     "suppressImplicitAnyIndexErrors":true,
     "types": ["element-plus", "axios"],
     "jsx": "preserve",
     "paths": {
-      "@/*": ["src/*"],
-      "@img/*": ["src/assets/img/*"]
+      "/@/*": ["src/*"]
     },
     "lib": [
       "esnext",
@@ -27,7 +28,11 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
+    "src/**/**/*.tsx",
+    "src/**/**/**/*.tsx",
     "src/**/*.vue",
+    "src/**/**/*.vue",
+    "src/**/**/**/*.vue",
     "src/types/images.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx",

@@ -26,6 +26,7 @@ export default {
   components: {
     Header,
     Menu,
+    AppMain,
   },
   data() {
     return {

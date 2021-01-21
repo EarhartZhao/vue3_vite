@@ -1,14 +1,8 @@
-import { computed, defineComponent, toRefs } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, defineComponent, toRefs, Transition } from 'vue'
+import { useRoute, useRouter, RouterView } from 'vue-router'
 
 export default defineComponent({
   name: "AppMain",
-  props: {
-    icon: {
-      type: String,
-      default: "",
-    },
-  },
   setup() {
     // const { icon, sizeNum } = toRefs(props);
     // const cachedViews: Array<string> = [];
@@ -16,17 +10,28 @@ export default defineComponent({
     // const router = useRouter()
     const route = useRoute();
     const key = computed(() => route.fullPath);
-    console.log("key -----------", key);
+    console.log("key -----------", key.value);
     return () => (
       <>
+        {/* <template> */}
         <div class="appMain">
-          <transition name="fade-transform" mode="out-in">
-            {/* <keep-alive include={cachedViews}> */}
+          {/* <transition name="fade-transform" mode="out-in">
             <keep-alive>
-              <router-view key={key} />
+              <router-view route={key.value} />
             </keep-alive>
-          </transition>
+          </transition> */}
+          {/* <Transition name="fade" mode="in-out">
+            <RouterView />
+          </Transition> */}
+          {/* <router-view v-slot="{ Component }">
+            <transition mode="in-out">
+              <component is="{Component}" />
+            </transition>
+          </router-view> */}
+          {/* <router-view></router-view> */}
+          <RouterView />
         </div>
+        {/* </template> */}
       </>
     );
   },
