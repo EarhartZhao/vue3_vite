@@ -1,7 +1,7 @@
 export const views: any = {
   //  base router
   Login: "base/login/index.vue",
-  Index: "layout/index.vue",
+  Index: "layout/index",
   Error500: "base/errorPage/Error500",
   Error404: "base/errorPage/Error404",
 
