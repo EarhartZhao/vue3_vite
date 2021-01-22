@@ -7,7 +7,7 @@ const expandRouters = {
   path: "/expand",
   name: "Expand",
   component: Index,
-  redirect: "noredirect",
+  redirect: "/expand/table",
   meta: {
     title: "扩展",
     noCache: true,
@@ -15,7 +15,7 @@ const expandRouters = {
   },
   children: [
     {
-      path: "Table",
+      path: "table",
       component: Expand_Table,
       name: "Expand_Table",
       meta: {

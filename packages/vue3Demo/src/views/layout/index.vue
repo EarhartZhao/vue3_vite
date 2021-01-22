@@ -8,7 +8,6 @@
         <Menu />
       </el-aside>
       <el-main>
-        <!-- <router-view></router-view> -->
         <AppMain />
       </el-main>
     </el-container>

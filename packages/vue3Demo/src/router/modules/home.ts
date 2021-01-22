@@ -7,6 +7,7 @@ const Home_Index = () => import("/@/views/main/home/index");
 const homeRouters = {
   path: "/home",
   name: "Home",
+  redirect: "/home/index",
   component: Index,
   meta: {
     title: "首页",

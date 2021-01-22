@@ -1,4 +1,4 @@
-import { store, useStore } from '../store/index'
+import { store } from '../store/index'
 import { getters } from '../types/store/router'
 import router from './index'
 import expandRouters from './modules/expand'
@@ -9,16 +9,21 @@ router.beforeEach(async (to: any, from: any, next: any) => {
   // console.log("store", store);
   // console.log("store getters", store.getters["router/getRouters"]);
   const getRouters = store.getters["router/getRouters"];
-  // if (getRouters && getRouters.length > 0) {
-  //   console.log(11111111111);
-  //   router.addRoute(getRouters);
-  // } else {
-  //   console.log(22222222222);
-  //   router.addRoute(homeRouters);
-  //   store.commit("router/setProducts", homeRouters);
-  // }
-  console.log("router", router.getRoutes());
-  console.log("has router:", to.fullPath, router.hasRoute(to.fullPath));
+  if (getRouters && getRouters.length > 0) {
+  } else {
+    // router.addRoute(homeRouters);
+    let routerArr: Array<any> = [];
+    routerArr.push(expandRouters, homeRouters);
+    store.commit("router/setProducts", routerArr);
+  }
+  // console.log("has router:", to.fullPath, router.hasRoute(to.fullPath));
   // console.log("router", router.getRoutes());
   next();
 });
+
+/*
+  模拟添加动态路由
+  将动态获取的路由，添加到 vuex 内，在导航中使用动态获取的路由，从而实现动态权限路由
+  待解决问题：1.vuex 保存动态路由信息后，同步添加到 vueRouter 中
+            2.vueRouter 如何添加多条路由，目前 addRoute() 仅能添加一条路由
+*/

@@ -5,8 +5,6 @@ export default defineComponent({
   name: "AppMain",
   setup() {
     // const { icon, sizeNum } = toRefs(props);
-    // const cachedViews: Array<string> = [];
-    // const key: string = "";
     // const router = useRouter()
     const route = useRoute();
     const key = computed(() => route.fullPath);
@@ -36,3 +34,7 @@ export default defineComponent({
     );
   },
 });
+
+/*
+  待解决问题，tsx内如何使用 Transition
+*/
