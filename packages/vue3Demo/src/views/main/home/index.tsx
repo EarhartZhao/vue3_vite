@@ -1,3 +1,4 @@
+import { Icon, Image } from '/@comp/index'
 import { defineComponent } from 'vue'
 import { useStore } from 'vuex'
 
@@ -10,6 +11,8 @@ export default defineComponent({
       <>
         <h1>Home</h1>
         <h1>This is home page</h1>
+        <Image />
+        <Icon icon="cache" />
       </>
     );
   },

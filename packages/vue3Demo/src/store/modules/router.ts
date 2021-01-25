@@ -7,7 +7,7 @@ const state: storeState = {
 };
 
 const getters: GetterTree<storeState, storeState> & storeGetters = {
-  getRouters: (state: storeState) => state.routers,
+  getRouters: (state: storeState) => state.permissionRouters,
   // getRouters(state: storeState) {
   //   return state.routers;
   // },

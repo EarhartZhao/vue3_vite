@@ -12,7 +12,7 @@ const homeRouters = {
   meta: {
     title: "首页",
     noCache: true,
-    icon: "",
+    icon: "cache",
   },
   children: [
     {
@@ -22,7 +22,7 @@ const homeRouters = {
       meta: {
         title: "首页",
         noCache: true,
-        icon: "",
+        icon: "cache",
       },
     },
   ],

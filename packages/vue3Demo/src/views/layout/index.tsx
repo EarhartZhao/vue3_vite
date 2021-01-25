@@ -4,8 +4,8 @@ import { ElAside, ElContainer, ElHeader, ElMain } from 'element-plus'
 import { defineComponent } from 'vue'
 
 import AppMain from './appMain/index'
-import Header from './header/index.vue'
-import Menu from './menu/index.vue'
+import Header from './header/index'
+import Menu from './menu/index'
 
 export default defineComponent({
   name: "Index",
@@ -27,7 +27,7 @@ export default defineComponent({
   //   );
   // },
   render() {
-    return () => (
+    return (
       <ElContainer class="main layout">
         <ElHeader>
           <Header />
