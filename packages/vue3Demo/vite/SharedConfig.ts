@@ -6,7 +6,10 @@ import { aliasOptions } from './options/aliasOptions'
 export const share_config: SharedConfig = {
   root: process.cwd(),
   alias: aliasOptions,
-  jsx: "vue",
+  esbuild: {
+    jsxFactory: "h",
+    jsxFragment: "Fragment",
+  },
   /**
    * Project root directory. Can be an absolute path, or a path relative from
    * the location of the config file itself.
@@ -39,23 +42,10 @@ export const share_config: SharedConfig = {
    */
   // assetsInclude?: (file: string) => boolean
   /**
-   * Custom file transforms.
-   */
-  // transforms?: Transform[]
-  /**
-   * Custom index.html transforms.
-   */
-  // indexHtmlTransforms?: IndexHtmlTransform[]
-  /**
    * Define global variable replacements.
    * Entries will be defined on `window` during dev and replaced during build.
    */
   // define?: Record<string, any>
-  /**
-   * Resolvers to map dev server public path requests to/from file system paths,
-   * and optionally map module ids to public path requests.
-   */
-  // resolvers?: Resolver[]
   /**
    * Configure dep optimization behavior.
    *
@@ -101,18 +91,6 @@ export const share_config: SharedConfig = {
    */
   // vueCustomBlockTransforms?: Record<string, CustomBlockTransform>
   /**
-   * Configure what to use for jsx factory and fragment.
-   * @default 'vue'
-   */
-  // jsx?:
-  //   | 'vue'
-  //   | 'preact'
-  //   | 'react'
-  //   | {
-  //       factory?: string
-  //       fragment?: string
-  //     }
-  /**
    * Environment mode
    */
   // mode?: string
@@ -124,11 +102,6 @@ export const share_config: SharedConfig = {
    * CSS modules options
    */
   // cssModuleOptions?: SFCAsyncStyleCompileOptions['modulesOptions']
-  /**
-   * Enable esbuild
-   * @default true
-   */
-  // enableEsbuild?: boolean
   /**
    * Environment variables parsed from .env files
    * only ones starting with VITE_ are exposed on `import.meta.env`

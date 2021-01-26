@@ -1,0 +1,17 @@
+export default {
+  target: "modules",
+  polyfillDynamicImport: false,
+  outDir: "dist",
+  assetsDir: "assets",
+  assetsInlineLimit: 4096,
+  cssCodeSplit: true,
+  sourcemap: false,
+  rollupOptions: {},
+  commonjsOptions: {},
+  manifest: false,
+  minify: "terser",
+  terserOptions: {},
+  cleanCssOptions: {},
+  write: true,
+  emptyOutDir: true,
+};

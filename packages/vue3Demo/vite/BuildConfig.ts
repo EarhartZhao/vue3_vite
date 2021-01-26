@@ -12,9 +12,10 @@ export const build_config = {
   terserOptions: {},
   // esbuildTarget:'',
   ssr: false,
-  rollupInputOptions: {
-    external: ["fs", "child_process", "vuex-class", "vuex"],
-  },
+  rollupOptions: {},
+  // rollupInputOptions: {
+  //   external: ["fs", "child_process", "vuex-class", "vuex"],
+  // },
 
   /**
    * Entry. Use this to specify a js entry file in use cases where an
@@ -80,18 +81,6 @@ export const build_config = {
   // ssr?: boolean
 
   // The following are API / config only and not documented in the CLI. --------
-  /**
-   * Will be passed to rollup.rollup()
-   *
-   * https://rollupjs.org/guide/en/#big-list-of-options
-   */
-  // rollupInputOptions: ViteRollupInputOptions
-  /**
-   * Will be passed to bundle.generate()
-   *
-   * https://rollupjs.org/guide/en/#big-list-of-options
-   */
-  // rollupOutputOptions: RollupOutputOptions
   /**
    * Will be passed to rollup-plugin-vue
    *

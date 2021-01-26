@@ -1,10 +1,10 @@
-import { build_config } from './BuildConfig'
-import { server_config } from './ServerConfig'
-import { share_config } from './SharedConfig'
+import base from './base'
+import build from './build'
+import optimizeDeps from './optimizeDeps'
+import server from './server'
 
-export const config = Object.assign(
-  {},
-  build_config,
-  server_config,
-  share_config
-);
+const config = Object.assign(base, { build, optimizeDeps, server });
+
+// console.log("config", config);
+
+export default config;

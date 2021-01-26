@@ -4,6 +4,8 @@
 
 ### vite文档 <https://vite-design.surge.sh/guide/chinese-doc.html>
 
+### vite文档2.0 <https://vitejs.dev/guide/>
+
 ### vueRouter <https://next.router.vuejs.org/>
 
 ### vuex4 <https://next.vuex.vuejs.org/>
