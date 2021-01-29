@@ -9,7 +9,7 @@ export default {
   rollupOptions: {},
   commonjsOptions: {},
   manifest: false,
-  minify: "terser",
+  // minify: "terser",
   terserOptions: {},
   cleanCssOptions: {},
   write: true,

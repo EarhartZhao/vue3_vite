@@ -1,4 +1,4 @@
-import { getComponent } from '../view'
+// import { getComponent } from '../view'
 import { Index } from './base'
 
 const Home_Index = () => import("/@/views/main/home/index");

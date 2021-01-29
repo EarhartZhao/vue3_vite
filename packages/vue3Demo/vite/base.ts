@@ -1,3 +1,4 @@
+import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
 import { aliasOptions } from './options/aliasOptions'
@@ -7,19 +8,20 @@ export default {
     vueJsx({
       // options are passed on to @vue/babel-plugin-jsx
     }),
+    vue(),
   ],
   alias: aliasOptions,
-  define: "",
+  // define: "",
   root: process.cwd(),
   base: "/",
   mode: "dev",
-  css: {
-    modules: {},
-    postcss: [],
-    preprocessorOptions: {
-      scss: {},
-    },
-  },
+  // css: {
+  //   modules: {},
+  //   postcss: [],
+  //   preprocessorOptions: {
+  //     scss: {},
+  //   },
+  // },
   json: {
     namedExports: true,
     stringify: false,
@@ -30,6 +32,6 @@ export default {
   },
   assetsInclude: "",
   dedupe: [],
-  logLevel: "info", //'info' | 'warn' | 'error' | 'silent'
+  // logLevel: "info", //'info' | 'warn' | 'error' | 'silent'
   clearScreen: true,
 };

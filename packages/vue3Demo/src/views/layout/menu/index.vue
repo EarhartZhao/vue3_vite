@@ -1,68 +1,65 @@
 <template>
-  <Loading />
-  <!-- <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
-    <el-radio-button :label="false">展开</el-radio-button>
-    <el-radio-button :label="true">收起</el-radio-button>
-  </el-radio-group>
-  <el-menu
-    default-active="1-4-1"
-    class="el-menu-vertical-demo"
-    @open="handleOpen"
-    @close="handleClose"
-    :collapse="isCollapse"
+  <Menu
+    mode="inline"
+    :openKeys="openKeys"
+    v-model:selectedKeys="selectedKeys"
+    @openChange="onOpenChange"
   >
-    <el-submenu index="1">
+    <SubMenu :key="item.path" :id="item.path" v-for="(item, index) in routers">
       <template #title>
-        <i class="el-icon-location"></i>
-        <span>导航一</span>
+        <span>
+          <Icon :icon="item.meta.icon" /><span>{{ item.meta.title }}</span>
+        </span>
       </template>
-      <el-menu-item-group>
-        <template #title>分组一</template>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="1-3">选项3</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="1-4">
-        <template #title>选项4</template>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
-      </el-submenu>
-    </el-submenu>
-    <el-menu-item index="2">
-      <i class="el-icon-menu"></i>
-      <template #title>导航二</template>
-    </el-menu-item>
-    <el-menu-item index="3" disabled>
-      <i class="el-icon-document"></i>
-      <template #title>导航三</template>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <i class="el-icon-setting"></i>
-      <template #title>导航四</template>
-    </el-menu-item>
-  </el-menu> -->
+      <Item
+        :key="ite.path"
+        :id="ite.path"
+        v-for="(ite, ind) in item.children"
+        >{{ ite.path }}</Item
+      >
+    </SubMenu>
+  </Menu>
 </template>
 
-<script>
+<script lang="ts">
 import "/@styleLayout/menu/index.scss";
-import Loading from "/@comp/loading";
-export default {
-  components: {
-    Loading,
+import { useStore } from "/@store/index";
+import { Menu } from "ant-design-vue";
+const { Item, SubMenu, ItemGroup } = Menu;
+import { computed, defineComponent, reactive, ref } from "vue";
+export default defineComponent({
+  name: "Menu",
+  data() {
+    return {
+      rootSubmenuKeys: ["sub1", "sub2", "sub4"],
+      openKeys: ["sub1"],
+      selectedKeys: [],
+    };
   },
-  // data() {
-  //   return {
-  //     isCollapse: true,
-  //   };
-  // },
-  // methods: {
-  //   handleOpen(key, keyPath) {
-  //     console.log(key, keyPath);
-  //   },
-  //   handleClose(key, keyPath) {
-  //     console.log(key, keyPath);
-  //   },
-  // },
-};
+  components: {
+    Item,
+    SubMenu,
+    ItemGroup,
+    Menu,
+  },
+  setup() {
+    const store = useStore();
+    const routers =
+      computed(() => store.getters["router/getRouters"]).value || [];
+    return { routers };
+  },
+  methods: {
+    onOpenChange(openKeys) {
+      console.log("openKeys", openKeys);
+      const latestOpenKey = openKeys.find(
+        (key) => this.openKeys.indexOf(key) === -1
+      );
+      if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+        this.openKeys = openKeys;
+      } else {
+        this.openKeys = latestOpenKey ? [latestOpenKey] : [];
+      }
+    },
+  },
+});
 </script>

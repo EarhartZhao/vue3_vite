@@ -3,7 +3,9 @@ import '/@styleLayout/menu/index.scss'
 import { Icon, Image } from '/@comp/index'
 import { useStore } from '/@store/index'
 import { Router } from '/@types/components/router'
-import { ElAside, ElMenu, ElMenuItem, ElMenuItemGroup, ElSubmenu } from 'element-plus'
+import { Menu } from 'ant-design-vue'
+const { Item, SubMenu, ItemGroup } = Menu
+
 import { computed, defineComponent, reactive, ref } from 'vue'
 
 export default defineComponent({
@@ -14,56 +16,54 @@ export default defineComponent({
       computed(() => store.getters["router/getRouters"]).value || [];
     return { routers };
   },
+  onOpenChange(openKeys) {
+    const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1);
+    if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      this.openKeys = openKeys;
+    } else {
+      this.openKeys = latestOpenKey ? [latestOpenKey] : [];
+    }
+  },
   render() {
     const { routers } = this;
     const slots = {
-      title: () => <span>导航一</span>,
-      // title: () => {
+      // title: () => (
       //   <span>
-      //     <Icon icon="cache" />
-      //     <span>导航一</span>
-      //   </span>;
-      // },
-      foo: () => [
-        <div>
-          <Icon icon="cache" />
-          <span>导航一</span>
-        </div>,
-      ],
+      //     <Icon icon="ceche" />
+      //     <span>123123</span>
+      //   </span>
+      // ),
+      default: () => (
+        <span>
+          <Icon icon="ceche" />
+          <span>123123</span>
+        </span>
+      ),
+      title: (item: any) => (
+        <span>
+          <Icon icon={item.meta.icon} />
+          <span>{item.meta.title}</span>
+        </span>
+      ),
     };
-    // return (
-    //   <ElMenu class="el-menu-vertical-demo">
-    //     <ElSubmenu index="/home" v-slots={slots}>
-    //       <ElMenuItemGroup>
-    //         <ElMenuItem index="home/index">home1111</ElMenuItem>
-    //       </ElMenuItemGroup>
-    //     </ElSubmenu>
-    //   </ElMenu>
-    // );
+    const openKeys:Array<any> = []
     return (
-      <ElMenu class="el-menu-vertical-demo">
-        {routers.map((item: Router) => {
-          <ElSubmenu index={item.path}>
-            {/* {{
-              title: () => {
-                <span>
-                  <Icon icon={item.meta.icon} />
-                  <span>{item.meta.title}</span>
-                </span>;
-              },
-            }} */}
-            <ElMenuItemGroup>
+      <Menu mode="inline" openKeys={openKeys} v-model-selectedKeys="selectedKeys" >
+        {routers.map((item: Router) => (
+          <SubMenu key={item.path}>
+            {slots}
+            {/* <ItemGroup> */}
               {item.children && item.children.length > 0
-                ? item.children.map((ite: Router) => {
-                    <ElMenuItem index={item.path + "/" + ite.path}>
+                ? item.children.map((ite: Router) => (
+                    <Item key={item.path + "/" + ite.path}>
                       {ite.meta.title}
-                    </ElMenuItem>;
-                  })
+                    </Item>
+                  ))
                 : null}
-            </ElMenuItemGroup>
-          </ElSubmenu>;
-        })}
-      </ElMenu>
+            {/* </ItemGroup> */}
+          </SubMenu>
+        ))}
+      </Menu>
     );
   },
 });

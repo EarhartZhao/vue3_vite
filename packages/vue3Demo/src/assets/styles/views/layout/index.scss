@@ -6,24 +6,23 @@
 }
 
 .layout {
-  .el-header {
+  .ant-layout-header {
     @extend .w-f,
     .pd-0;
     height: 50px !important;
   }
 
   .layout_box {
-    // @extend ;
     height: calc(100vh - 50px);
 
-    .el-aside {
+    .ant-layout-sider {
       @extend .h-f,
       .scroll;
       border: 1px solid;
       width: 180px !important;
     }
 
-    .el-main {
+    .ant-layout-content {
       width: calc(100% - 180px);
       @extend .h-f,
       .pd-20,
