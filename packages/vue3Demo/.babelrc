@@ -1,6 +1,13 @@
 {
   "plugins": [
     ["import", { "libraryDirectory": "es", "style": "css" }] // `style: true` 会加载 less 文件
-    ,["@vue/babel-plugin-jsx"]
+    ,["@vue/babel-plugin-jsx"],
+    [
+      "component",
+      {
+        "libraryName": "element-plus",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
   ]
 }

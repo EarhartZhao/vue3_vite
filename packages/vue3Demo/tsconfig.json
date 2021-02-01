@@ -13,7 +13,7 @@
     "noImplicitAny": true,
     "isolatedModules": true,
     "suppressImplicitAnyIndexErrors":true,
-    "types": ["ant-design-vue", "axios", "vite/client"],
+    "types": ["element-plus", "axios", "vite/client"],
     "jsx": "preserve",
     "paths": {
       "/@/*": ["src/*"]

@@ -1,4 +1,6 @@
-@use '../index.scss';
+@use '../index';
+
+$px: 10px;
 
 .scroll {
   overflow-y: auto;
@@ -6,7 +8,7 @@
 }
 
 .layout {
-  .ant-layout-header {
+  .el-header {
     @extend .w-f,
     .pd-0;
     height: 50px !important;
@@ -15,14 +17,16 @@
   .layout_box {
     height: calc(100vh - 50px);
 
-    .ant-layout-sider {
+    .el-aside {
       @extend .h-f,
       .scroll;
-      border: 1px solid;
       width: 180px !important;
+      background-color: #545b65;
+      border-top: 20px solid #545b65;
+      border-bottom: 20px solid #545b65;
     }
 
-    .ant-layout-content {
+    .el-main {
       width: calc(100% - 180px);
       @extend .h-f,
       .pd-20,

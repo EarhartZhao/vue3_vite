@@ -1,47 +1,40 @@
 <template>
-  <Menu
-    mode="inline"
-    :openKeys="openKeys"
-    v-model:selectedKeys="selectedKeys"
-    @openChange="onOpenChange"
+  <el-menu
+    :uniqueOpened="true"
+    :default-active="defaultRouter"
+    class="el-menu-vertical"
+    @open="handleOpen"
+    @close="handleClose"
   >
-    <SubMenu :key="item.path" :id="item.path" v-for="(item, index) in routers">
+    <el-submenu :index="item.path" v-for="item in routers" :key="item.path">
       <template #title>
-        <span>
-          <Icon :icon="item.meta.icon" /><span>{{ item.meta.title }}</span>
-        </span>
+        <Icon :icon="item.meta.icon" />
+        <span>{{ item.meta.title }}</span>
       </template>
-      <Item
-        :key="ite.path"
-        :id="ite.path"
-        v-for="(ite, ind) in item.children"
-        >{{ ite.path }}</Item
-      >
-    </SubMenu>
-  </Menu>
+      <el-menu-item-group>
+        <el-menu-item
+          v-for="ite in item.children"
+          :key="ite.path"
+          :index="ite.path"
+          >{{ ite.meta.title }}</el-menu-item
+        >
+      </el-menu-item-group>
+    </el-submenu>
+  </el-menu>
 </template>
 
 <script lang="ts">
 import "/@styleLayout/menu/index.scss";
 import { useStore } from "/@store/index";
-import { Menu } from "ant-design-vue";
-const { Item, SubMenu, ItemGroup } = Menu;
 import { computed, defineComponent, reactive, ref } from "vue";
 export default defineComponent({
   name: "Menu",
   data() {
     return {
-      rootSubmenuKeys: ["sub1", "sub2", "sub4"],
-      openKeys: ["sub1"],
-      selectedKeys: [],
+      defaultRouter: "/home/index",
     };
   },
-  components: {
-    Item,
-    SubMenu,
-    ItemGroup,
-    Menu,
-  },
+  components: {},
   setup() {
     const store = useStore();
     const routers =
@@ -49,16 +42,11 @@ export default defineComponent({
     return { routers };
   },
   methods: {
-    onOpenChange(openKeys) {
-      console.log("openKeys", openKeys);
-      const latestOpenKey = openKeys.find(
-        (key) => this.openKeys.indexOf(key) === -1
-      );
-      if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-        this.openKeys = openKeys;
-      } else {
-        this.openKeys = latestOpenKey ? [latestOpenKey] : [];
-      }
+    handleOpen(key, keyPath) {
+      // console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      // console.log(key, keyPath);
     },
   },
 });
