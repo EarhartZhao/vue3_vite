@@ -16,7 +16,18 @@
     "types": ["element-plus", "axios", "vite/client"],
     "jsx": "preserve",
     "paths": {
-      "/@/*": ["src/*"]
+      "/@/*": ["src/*"],
+      "/@assets/*": ["src/assets/*"],
+      "/@router/*": ["src/router/*"],
+      "/@store/*": ["src/store/*"],
+      "/@types/*": ["src/types/*"],
+      "/@utils/*": ["src/assets/utils/*"],
+      "/@comp/*": ["src/components/*"],
+      "/@icon/*": ["src/assets/iconfont/*"],
+      "/@style/*": ["src/assets/styles/*"],
+      "/@styleV/*": ["src/assets/styles/views/*"],
+      "/@styleBase/*": ["src/assets/styles/views/base/*"],
+      "/@styleLayout/*": ["src/assets/styles/views/layout/*"],
     },
     "lib": [
       "esnext",

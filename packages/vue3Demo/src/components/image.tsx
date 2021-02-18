@@ -10,7 +10,7 @@ export default defineComponent({
   props: {
     srcUrl: {
       type: String,
-      default: "",
+      default: Logo,
     },
     size: {
       type: Array,
@@ -19,7 +19,7 @@ export default defineComponent({
     },
     alt: {
       type: String,
-      default: "",
+      default: "test img",
     },
   },
   setup(props) {
@@ -39,9 +39,9 @@ export default defineComponent({
     };
     return () => (
       <>
-        <div class="ImageBox" style={handleSize}>
-          <img src={Logo} alt={alt} />
-          <ImageDialog />
+        <div class="ImageBox" style={handleSize(size)}>
+          <img src={srcUrl.value} alt={alt.value} />
+          <ImageDialog status="error" />
         </div>
       </>
     );

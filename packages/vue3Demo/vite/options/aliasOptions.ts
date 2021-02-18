@@ -1,6 +1,6 @@
 import { join } from 'path'
 
-const pathResolve = (dir: string) => join(__dirname, dir);
+const pathResolve = (dir: string) => join(__dirname, dir + "/");
 
 const options = [
   {
@@ -10,6 +10,10 @@ const options = [
   {
     key: "@assets",
     values: "src/assets",
+  },
+  {
+    key: "@router",
+    values: "src/router",
   },
   {
     key: "@store",
@@ -50,10 +54,13 @@ const options = [
     values: "src/assets/styles/views/layout",
   },
 ];
+let aliasOptions = [];
 
-let obj = {};
 options.forEach((item) => {
-  obj[`/${item.key}/`] = pathResolve(item.values);
+  let obj = {};
+  obj["find"] = new RegExp(`/${item.key}/`);
+  obj["replacement"] = pathResolve(item.values);
+  aliasOptions.push(obj);
 });
 
-export const aliasOptions = obj;
+export default aliasOptions;

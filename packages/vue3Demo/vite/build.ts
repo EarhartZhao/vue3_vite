@@ -1,3 +1,5 @@
+import bytenode from 'rollup-plugin-bytenode'
+
 export default {
   target: "modules",
   polyfillDynamicImport: false,
@@ -6,7 +8,23 @@ export default {
   assetsInlineLimit: 4096,
   cssCodeSplit: true,
   sourcemap: false,
-  rollupOptions: {},
+  rollupOptions: {
+    output: {
+      compact: true,
+    },
+    // input: "src/main.ts",
+    // output: [
+    //   {
+    //     dir: "dist",
+    //     file: "dist/main.js",
+    //     format: "cjs",
+    //     inlineDynamicImports: true,
+    //   },
+    // ],
+    // plugins: [bytenode()],
+  },
+  brotliSize: false,
+  chunkSizeWarningLimit: 1200,
   commonjsOptions: {},
   manifest: false,
   // minify: "terser",

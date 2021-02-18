@@ -13,15 +13,23 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { status } = props;
+    const { status } = toRefs(props);
+
+    const s = status.value;
+    console.log("imgDia comp", s);
     return () => (
       <>
-        <div class="ImageDialog" v-if={status != "success"}>
-          <img src={loadingError} v-if={status == "error"} />
-          <div class="ImageDialogLoading" v-if={status == "loading"}>
-            <i class="el-icon-loading"></i>
+        {s != "success" ? (
+          <div class="ImageDialog">
+            {s == "error" ? (
+              <img src={loadingError} />
+            ) : (
+              <div class="ImageDialogLoading">
+                <i class="el-icon-loading"></i>
+              </div>
+            )}
           </div>
-        </div>
+        ) : null}
       </>
     );
   },

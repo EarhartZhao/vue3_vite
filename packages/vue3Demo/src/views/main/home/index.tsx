@@ -12,10 +12,12 @@ export default defineComponent({
       default: () => <div>A</div>,
     };
 
+    console.log("home setup tsx");
+
     return () => (
       <>
         <h1>Home</h1>
-        <h1>This is home page</h1>
+        <h1>This is home page tsx</h1>
         <CompTest>{slot}</CompTest>
         <Image />
         <Icon icon="cache" />

@@ -2,9 +2,8 @@
   <el-menu
     :uniqueOpened="true"
     :default-active="defaultRouter"
+    @select="selectRouter"
     class="el-menu-vertical"
-    @open="handleOpen"
-    @close="handleClose"
   >
     <el-submenu :index="item.path" v-for="item in routers" :key="item.path">
       <template #title>
@@ -31,7 +30,7 @@ export default defineComponent({
   name: "Menu",
   data() {
     return {
-      defaultRouter: "/home/index",
+      // defaultRouter: "/home/index",
     };
   },
   components: {},
@@ -39,15 +38,15 @@ export default defineComponent({
     const store = useStore();
     const routers =
       computed(() => store.getters["router/getRouters"]).value || [];
-    return { routers };
-  },
-  methods: {
-    handleOpen(key, keyPath) {
-      // console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      // console.log(key, keyPath);
-    },
+    const defaultRouter =
+      computed(() => store.getters["router/getDefaultRouter"]).value || "";
+    const selectR = (key, keyPath) => {
+      console.log("selectRouter----", key, keyPath);
+      const path = keyPath[0] + "/" + keyPath[1];
+      console.log("store----", store);
+      store.commit("router/setCurrentRouter", path);
+    };
+    return { routers, defaultRouter, selectRouter: selectR };
   },
 });
 </script>

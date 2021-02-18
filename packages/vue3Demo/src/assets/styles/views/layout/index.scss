@@ -1,4 +1,4 @@
-@use '../index';
+@use '../../export/base';
 
 $px: 10px;
 
@@ -21,9 +21,9 @@ $px: 10px;
       @extend .h-f,
       .scroll;
       width: 180px !important;
-      background-color: #545b65;
-      border-top: 20px solid #545b65;
-      border-bottom: 20px solid #545b65;
+      background-color: base.$blue2;
+      border-top: 20px solid base.$blue2;
+      border-bottom: 20px solid base.$blue2;
     }
 
     .el-main {

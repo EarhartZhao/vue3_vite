@@ -17,7 +17,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
     store.commit("router/setProducts", routerArr);
   }
   // console.log("has router:", to.fullPath, router.hasRoute(to.fullPath));
-  // console.log("router", router.getRoutes());
+  console.log("router", router.getRoutes());
   next();
 });
 

@@ -1,7 +1,7 @@
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
-import { aliasOptions } from './options/aliasOptions'
+import aliasOptions from './options/aliasOptions'
 
 export default {
   plugins: [
@@ -11,17 +11,18 @@ export default {
     vue(),
   ],
   alias: aliasOptions,
-  // define: "",
   root: process.cwd(),
   base: "/",
   mode: "dev",
-  // css: {
-  //   modules: {},
-  //   postcss: [],
-  //   preprocessorOptions: {
-  //     scss: {},
-  //   },
-  // },
+  css: {
+    // modules: {},
+    // postcss: [],
+    // preprocessorOptions: {
+    //   scss: {
+    //     additionalData: ``,
+    //   },
+    // },
+  },
   json: {
     namedExports: true,
     stringify: false,
@@ -31,7 +32,7 @@ export default {
     jsxFragment: "Fragment",
   },
   assetsInclude: "",
-  dedupe: [],
+  // dedupe: [],
   // logLevel: "info", //'info' | 'warn' | 'error' | 'silent'
   clearScreen: true,
 };

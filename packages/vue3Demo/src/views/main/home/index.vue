@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Home</h1>
-    <h1>This is home page</h1>
+    <h1>This is home page vue</h1>
     <CompTest>
       <p>I am slot</p>
     </CompTest>
@@ -22,5 +22,8 @@ import CompTest from "./compTest";
 export default defineComponent({
   name: "Home",
   components: { CompTest, Icon, Image },
+  setup() {
+    console.log("home setup vue");
+  },
 });
 </script>
