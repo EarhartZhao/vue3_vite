@@ -1,8 +1,8 @@
-// import '/@styleLayout/menu/index.scss'
+// import '@styleLayout/menu/index.scss'
 
-// import { Icon, Image } from '/@comp/index'
-// import { useStore } from '/@store/index'
-// import { Router } from '/@types/components/router'
+// import { Icon, Image } from '@comp/index'
+// import { useStore } from '@store/index'
+// import { Router } from '@types/components/router'
 // import { Menu } from 'ant-design-vue'
 // const { Item, SubMenu, ItemGroup } = Menu
 

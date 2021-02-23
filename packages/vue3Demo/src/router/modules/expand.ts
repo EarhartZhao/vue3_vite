@@ -1,7 +1,7 @@
 import { Index } from './base'
 
-const Expand_Table = () => import("/@/views/main/expand/table");
-const Expand_Form = () => import("/@/views/main/expand/form");
+const Expand_Table = () => import("@/views/main/expand/table");
+const Expand_Form = () => import("@/views/main/expand/form");
 
 const expandRouters = {
   path: "/expand",

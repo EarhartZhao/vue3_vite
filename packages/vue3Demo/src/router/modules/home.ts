@@ -1,7 +1,7 @@
 // import { getComponent } from '../view'
 import { Index } from './base'
 
-const Home_Index = () => import("/@/views/main/home/index");
+const Home_Index = () => import("@/views/main/home/index");
 // const Home_Index = getComponent("Home_Index");
 
 const homeRouters = {

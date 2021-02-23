@@ -1,4 +1,4 @@
-import '/@style/component/index.scss'
+import '@style/component/index.scss'
 
 import { defineComponent } from 'vue'
 

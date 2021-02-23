@@ -11,14 +11,10 @@
 </template>
 
 <script lang="ts">
-import { Icon, Image } from "/@comp/index";
+import { Icon, Image } from "@comp/index";
 import { defineComponent } from "vue";
 
 import CompTest from "./compTest";
-// export default {
-//   name: "Home",
-//   components: { CompTest, Icon, Image },
-// };
 export default defineComponent({
   name: "Home",
   components: { CompTest, Icon, Image },

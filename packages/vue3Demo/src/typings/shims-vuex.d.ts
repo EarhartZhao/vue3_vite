@@ -1,4 +1,4 @@
-import { storeState } from '/@types/index'
+import { storeState } from '@types/index'
 import { ComponentCustomProperties } from 'vue'
 import { Store } from 'vuex'
 

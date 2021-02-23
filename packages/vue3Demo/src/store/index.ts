@@ -1,4 +1,4 @@
-import { storeState } from '/@types/store/index'
+import { storeState } from '@types/store/index'
 import { InjectionKey } from 'vue'
 import { createLogger, createStore, useStore as baseUseStore, Store as VuexStore } from 'vuex'
 

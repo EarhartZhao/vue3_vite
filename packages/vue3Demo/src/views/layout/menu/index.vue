@@ -23,8 +23,8 @@
 </template>
 
 <script lang="ts">
-import "/@styleLayout/menu/index.scss";
-import { useStore } from "/@store/index";
+import "@styleLayout/menu/index.scss";
+import { useStore } from "@store/index";
 import { computed, defineComponent, reactive, ref } from "vue";
 export default defineComponent({
   name: "Menu",

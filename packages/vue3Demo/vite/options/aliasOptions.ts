@@ -58,7 +58,7 @@ let aliasOptions = [];
 
 options.forEach((item) => {
   let obj = {};
-  obj["find"] = new RegExp(`/${item.key}/`);
+  obj["find"] = new RegExp(`${item.key}/`);
   obj["replacement"] = pathResolve(item.values);
   aliasOptions.push(obj);
 });

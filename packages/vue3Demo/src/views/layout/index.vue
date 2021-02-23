@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import "/@styleLayout/index.scss";
+import "@styleLayout/index.scss";
 import { ElAside, ElContainer, ElHeader, ElMain } from "element-plus";
 import Header from "./header/index";
 import Menu from "./menu/index.vue";

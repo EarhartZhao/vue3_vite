@@ -11,6 +11,8 @@ export default {
   rollupOptions: {
     output: {
       compact: true,
+      dir: "dist",
+      format: "amd",
     },
     // input: "src/main.ts",
     // output: [

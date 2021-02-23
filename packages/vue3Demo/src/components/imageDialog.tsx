@@ -1,6 +1,6 @@
-import '/@style/component/index.scss'
+import '@style/component/index.scss'
 
-import loadingError from '/@assets/svg/loadingError.svg'
+import loadingError from '@assets/svg/loadingError.svg'
 import { defineComponent, toRefs } from 'vue'
 
 export default defineComponent({
@@ -16,7 +16,6 @@ export default defineComponent({
     const { status } = toRefs(props);
 
     const s = status.value;
-    console.log("imgDia comp", s);
     return () => (
       <>
         {s != "success" ? (

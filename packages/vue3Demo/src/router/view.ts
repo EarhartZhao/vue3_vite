@@ -22,8 +22,8 @@ export const viewsKey = Object.keys(views);
 
 export const getComponent = (name: string): any => {
   if (!viewsKey.includes(name)) throw new Error("缺少该路由！");
-  const view = "/@/views/" + views[name];
+  const view = "@/views/" + views[name];
   return () => import(view);
-  // return () => import(`/@/views/${views[name]}`);
+  // return () => import(`@/views/${views[name]}`);
   // return () => Promise.resolve(require(view).default);
 };

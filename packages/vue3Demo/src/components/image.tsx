@@ -1,4 +1,4 @@
-import '/@style/component/index.scss'
+import '@style/component/index.scss'
 
 import { defineComponent, toRefs } from 'vue'
 
@@ -19,7 +19,7 @@ export default defineComponent({
     },
     alt: {
       type: String,
-      default: "test img",
+      default: "test alt",
     },
   },
   setup(props) {
@@ -41,7 +41,7 @@ export default defineComponent({
       <>
         <div class="ImageBox" style={handleSize(size)}>
           <img src={srcUrl.value} alt={alt.value} />
-          <ImageDialog status="error" />
+          <ImageDialog status="loading" />
         </div>
       </>
     );

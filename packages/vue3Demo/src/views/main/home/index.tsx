@@ -1,4 +1,4 @@
-import { Icon, Image } from '/@comp/index'
+import { Icon, Image } from '@comp/index'
 import { defineComponent } from 'vue'
 
 import CompTest from './compTest'
@@ -11,8 +11,6 @@ export default defineComponent({
       title: () => <p>I am slot</p>,
       default: () => <div>A</div>,
     };
-
-    console.log("home setup tsx");
 
     return () => (
       <>

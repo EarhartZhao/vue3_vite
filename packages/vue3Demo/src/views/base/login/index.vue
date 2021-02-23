@@ -9,7 +9,7 @@
 
 <script>
 import { ParticlesOptions } from "./ParticlesOptions";
-import "/@styleV/base/login/index.scss";
+import "@styleV/base/login/index.scss";
 export default {
   name: "login",
   data() {

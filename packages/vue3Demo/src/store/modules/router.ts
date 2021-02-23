@@ -1,6 +1,6 @@
-import router from '/@router/index'
-import { storeGetters, storeState } from '/@types/store/index'
-import stronge from '/@utils/stronge'
+import router from '@router/index'
+import { storeGetters, storeState } from '@types/store/index'
+import stronge from '@utils/stronge'
 import { ActionTree, GetterTree, MutationTree, StoreOptions } from 'vuex'
 
 const state: storeState = {
