@@ -5,7 +5,7 @@ import expandRouters from './modules/expand'
 import homeRouters from './modules/home'
 
 router.beforeEach(async (to: any, from: any, next: any) => {
-  console.log("to", to);
+  // console.log("to", to);
   // console.log("store", store);
   // console.log("store getters", store.getters["router/getRouters"]);
   const getRouters = store.getters["router/getRouters"];
@@ -17,7 +17,7 @@ router.beforeEach(async (to: any, from: any, next: any) => {
     store.commit("router/setProducts", routerArr);
   }
   // console.log("has router:", to.fullPath, router.hasRoute(to.fullPath));
-  console.log("router", router.getRoutes());
+  // console.log("router", router.getRoutes());
   next();
 });
 

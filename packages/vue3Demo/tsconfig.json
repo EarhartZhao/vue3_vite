@@ -16,6 +16,7 @@
     "types": ["element-plus", "axios", "vite/client"],
     "jsx": "preserve",
     "paths": {
+      "@config/*": ["config/*"],
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
       "@router/*": ["src/router/*"],
@@ -28,6 +29,7 @@
       "@styleV/*": ["src/assets/styles/views/*"],
       "@styleBase/*": ["src/assets/styles/views/base/*"],
       "@styleLayout/*": ["src/assets/styles/views/layout/*"],
+      "@styleMain/*": ["src/assets/styles/views/main/*"],
     },
     "lib": [
       "esnext",
@@ -49,7 +51,7 @@
     "src/types/images.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    "typings",
+    "typings", "src/assets/utils/print.ts", "src/views/main/expand/chart.vue",
   ],
   "exclude": ["node_modules", "dist"]
 }

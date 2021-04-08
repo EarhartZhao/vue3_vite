@@ -1,6 +1,6 @@
 import strong from '@utils/stronge'
 // axios.defaults.adapter = require('axios/lib/adapters/http');
-import axios from 'axios'
+import {axios} from './assets/axios/index'
 import { createApp } from 'vue'
 
 // import App from './App.vue'

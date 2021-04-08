@@ -3,6 +3,7 @@
     <Particles id="tsparticles" :options="ParticlesOptions" />
     <div class="box">
       <el-button type="primary" @click="turnPage">进入</el-button>
+      
     </div>
   </main>
 </template>

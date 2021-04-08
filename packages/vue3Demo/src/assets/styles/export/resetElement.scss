@@ -1,0 +1,67 @@
+@use './base';
+
+// dialog
+.el-dialog {
+  min-width: 500px;
+
+  .el-dialog__header {
+    border-bottom: 1px solid base.$grey3;
+    padding: 14px 20px 10px 20px;
+
+    .el-dialog__title {
+      font-size: 18px;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 10px 20px;
+  }
+
+  .el-dialog__footer {
+    border-top: 1px solid base.$grey3;
+  }
+}
+
+// button
+.el-button {
+  padding: 8px 14px;
+  min-height: auto;
+
+  span {
+    cursor: pointer;
+  }
+}
+
+.el-button.el-button--primary {}
+
+
+// form
+.el-form {
+  .el-form-item {
+    @extend .flex-l-w;
+    &:last-child{
+      margin: 0;
+    }
+  }
+}
+
+
+// input
+.el-input {
+  height: 34px;
+  line-height: 34px;
+
+  .el-input__inner {
+    height: 34px;
+    line-height: 34px;
+  }
+}
+
+.el-input__icon {
+  line-height: 34px;
+}
+
+//messageBox
+.el-message-box {
+  .el-message-box__header {}
+}

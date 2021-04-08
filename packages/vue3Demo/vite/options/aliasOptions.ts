@@ -4,6 +4,10 @@ const pathResolve = (dir: string) => join(__dirname, dir + "/");
 
 const options = [
   {
+    key: "@config",
+    values: "config",
+  },
+  {
     key: "@",
     values: "src",
   },
@@ -52,6 +56,10 @@ const options = [
   {
     key: "@styleLayout",
     values: "src/assets/styles/views/layout",
+  },
+  {
+    key: "@styleMain",
+    values: "src/assets/styles/views/main",
   },
 ];
 let aliasOptions = [];

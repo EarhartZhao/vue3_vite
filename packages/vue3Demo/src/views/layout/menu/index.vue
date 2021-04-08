@@ -41,9 +41,9 @@ export default defineComponent({
     const defaultRouter =
       computed(() => store.getters["router/getDefaultRouter"]).value || "";
     const selectR = (key, keyPath) => {
-      console.log("selectRouter----", key, keyPath);
+      // console.log("selectRouter----", key, keyPath);
       const path = keyPath[0] + "/" + keyPath[1];
-      console.log("store----", store);
+      // console.log("store----", store);
       store.commit("router/setCurrentRouter", path);
     };
     return { routers, defaultRouter, selectRouter: selectR };

@@ -1,0 +1,6 @@
+export default {
+  ENV_CONFIG: "prod",
+  NODE_ENV: "production",
+  STYDY_ITEM: "flowweb",
+  BASE_URL: "//192.168.1.219:8080",
+};
