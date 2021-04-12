@@ -14,7 +14,7 @@ const getters: GetterTree<storeState, storeState> & storeGetters = {
     state.permissionRouters[0].path +
     "/" +
     state.permissionRouters[0].children[0].path,
-  getCurrentRouter: (state: storeState): string => state.getCurrentRouter,
+  getCurrentRouter: (state: storeState) => state.getCurrentRouter,
 };
 
 const actions: ActionTree<storeState, storeState> = {
@@ -28,7 +28,7 @@ const mutations: MutationTree<storeState> = {
       ? stronge.remove("permissionRouters")
       : stronge.set("permissionRouters", router);
   },
-  setCurrentRouter(state: storeState, currentRouter: String) {
+  setCurrentRouter(state: storeState, currentRouter: string) {
     state.getCurrentRouter = currentRouter;
     router.push(currentRouter);
   },

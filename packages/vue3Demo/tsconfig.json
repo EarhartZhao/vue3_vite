@@ -13,7 +13,7 @@
     "noImplicitAny": true,
     "isolatedModules": true,
     "suppressImplicitAnyIndexErrors":true,
-    "types": ["element-plus", "axios", "vite/client"],
+    "types": ["element-plus", "axios", "vite/client", "node"],
     "jsx": "preserve",
     "paths": {
       "@config/*": ["config/*"],
@@ -51,7 +51,7 @@
     "src/types/images.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    "typings", "src/assets/utils/print.ts", "src/views/main/expand/chart.vue",
+    "typings", "src/assets/utils/print.ts", "src/views/main/expand/chart.vue", "src/views/base/login/reset.vue", "src/views/base/login/forgot.vue", "src/views/base/login/wrap.vue",
   ],
   "exclude": ["node_modules", "dist"]
 }
