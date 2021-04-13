@@ -1,4 +1,5 @@
-@use '../../index.scss';
+// @use '../../../export/base';
+@use '@styleE/base';
 
 #tsparticles {
   @extend .absolute,
@@ -14,4 +15,13 @@
   .flex-c-c;
   top: 30vh;
   z-index: 1;
+
+  .login_form_box {
+    .el-button {
+      width: 100%;
+      @extend .mt-20;
+      background-color: base.$blue1;
+      color: base.$white2;
+    }
+  }
 }

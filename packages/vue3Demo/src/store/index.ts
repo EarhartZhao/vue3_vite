@@ -5,6 +5,7 @@ import { createLogger, createStore, useStore as baseUseStore, Store as VuexStore
 import chartForm from './modules/chartForm'
 import router from './modules/router'
 import system from './modules/system'
+import user from './modules/user'
 
 const debug = process.env.NODE_ENV !== "production";
 
@@ -15,6 +16,7 @@ export const store = createStore({
     router,
     chartForm,
     system,
+    user,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : [],

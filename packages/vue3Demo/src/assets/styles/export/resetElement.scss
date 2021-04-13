@@ -38,8 +38,10 @@
 // form
 .el-form {
   .el-form-item {
-    @extend .flex-l-w;
-    &:last-child{
+    @extend .flex-l-w,
+    .mb-16;
+
+    &:last-child {
       margin: 0;
     }
   }

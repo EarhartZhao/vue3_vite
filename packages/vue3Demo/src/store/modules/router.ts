@@ -24,9 +24,10 @@ const actions: ActionTree<storeState, storeState> = {
 const mutations: MutationTree<storeState> = {
   setProducts(state: storeState, router: Array<any>) {
     state.permissionRouters = router;
-    router.length > 0
-      ? stronge.remove("permissionRouters")
-      : stronge.set("permissionRouters", router);
+    stronge.set("permissionRouters", router);
+    // router.length > 0
+    //   ? stronge.remove("permissionRouters")
+    //   : stronge.set("permissionRouters", router);
   },
   setCurrentRouter(state: storeState, currentRouter: string) {
     state.getCurrentRouter = currentRouter;

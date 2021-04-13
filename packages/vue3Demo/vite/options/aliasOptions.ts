@@ -36,6 +36,10 @@ const options = [
     values: "src/components",
   },
   {
+    key: "@api",
+    values: "src/assets/api",
+  },
+  {
     key: "@icon",
     values: "src/assets/iconfont",
   },
@@ -44,6 +48,10 @@ const options = [
   {
     key: "@style",
     values: "src/assets/styles",
+  },
+  {
+    key: "@styleE",
+    values: "src/assets/styles/export",
   },
   {
     key: "@styleV",

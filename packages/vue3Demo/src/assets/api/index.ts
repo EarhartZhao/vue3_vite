@@ -1,2 +1,4 @@
-import LOGIN from "./login";
-export default { LOGIN };
+import HWLOGIN from './hwLogin'
+import LOGIN from './login'
+
+export { LOGIN, HWLOGIN };
