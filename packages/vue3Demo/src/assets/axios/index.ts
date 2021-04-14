@@ -1,10 +1,8 @@
 import router from '@/router'
 import cfg from '@config/index'
-import { useStore } from '@store/index'
+import { store } from '@store/index'
 import axios from 'axios'
 import { ElLoading, ElMessage } from 'element-plus'
-
-const store = useStore();
 
 // 配置axios
 Object.assign(axios.defaults, {

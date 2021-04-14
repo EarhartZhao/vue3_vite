@@ -9,7 +9,7 @@ export const views: any = {
   Home_Index: "main/home/index",
 
   //  扩展
-  Expand_Table: "main/expand/table",
+  Expand_Table: "main/expand/table.vue",
   Expand_Form: "main/expand/form",
   // :'',
 };

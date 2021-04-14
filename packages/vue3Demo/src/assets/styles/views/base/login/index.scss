@@ -1,4 +1,3 @@
-// @use '../../../export/base';
 @use '@styleE/base';
 
 #tsparticles {
@@ -11,12 +10,29 @@
 }
 
 .login_box {
-  @extend .relative,
-  .flex-c-c;
+  @extend .absolute;
+  width: 277px;
   top: 30vh;
+  right: 20vw;
   z-index: 1;
 
   .login_form_box {
+    @extend .pd-30,
+    .relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      filter: blur(10px);
+    }
+
     .el-button {
       width: 100%;
       @extend .mt-20;

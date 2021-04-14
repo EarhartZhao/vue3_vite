@@ -63,16 +63,16 @@ export default defineComponent({
   name: "login",
   setup() {
     const store = useStore();
-    let form = reactive({
-      domain: "aicyber2020",
-      username: "zhouyujuan",
-      password: "Deepthink1@3",
-    });
     // let form = reactive({
-    //   domain: "aicyber",
-    //   username: "zhaoenbo",
-    //   password: "8820472522a",
+    //   domain: "aicyber2020",
+    //   username: "zhouyujuan",
+    //   password: "Deepthink1@3",
     // });
+    let form = reactive({
+      domain: "aicyber",
+      username: "zhaoenbo",
+      password: "8820472522a",
+    });
     let code = ref(0);
     let loading = ref(false);
 

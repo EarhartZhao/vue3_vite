@@ -17,7 +17,7 @@
 <script>
 import "@styleLayout/index.scss";
 import { ElAside, ElContainer, ElHeader, ElMain } from "element-plus";
-import Header from "./header/index";
+import Header from "./header/index.vue";
 import Menu from "./menu/index.vue";
 import AppMain from "./appMain/index.vue";
 export default {

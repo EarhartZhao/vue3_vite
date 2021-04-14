@@ -26,6 +26,7 @@
       "@comp/*": ["src/components/*"],
       "@api/*": ["src/assets/api/*"],
       "@icon/*": ["src/assets/iconfont/*"],
+      "@img/*": ["src/assets/images/*"],
       "@style/*": ["src/assets/styles/*"],
       "@styleE/*": ["src/assets/styles/export/*"],
       "@styleV/*": ["src/assets/styles/views/*"],

@@ -67,3 +67,15 @@
 .el-message-box {
   .el-message-box__header {}
 }
+
+// popover
+.el-popover {
+  min-width: 60px !important;
+  padding: 8px !important;
+
+  .header_func {
+    li {
+      cursor: pointer;
+    }
+  }
+}

@@ -28,6 +28,8 @@ router.beforeEach(async (to: any, from: any, next: any) => {
   if (whiteList.includes(to.path)) {
     // 白名单
     if (token) next("/index");
+  } else {
+    if (!token) next("/");
   }
 
   next();

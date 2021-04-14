@@ -7,7 +7,7 @@ export default {
   assetsDir: "assets",
   assetsInlineLimit: 4096,
   cssCodeSplit: true,
-  sourcemap: false,
+  sourcemap: true,
   rollupOptions: {
     output: {
       compact: true,

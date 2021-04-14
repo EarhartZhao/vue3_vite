@@ -1,6 +1,6 @@
 import { Index } from './base'
 
-const Expand_Table = () => import("@/views/main/expand/table");
+const Expand_Table = () => import("@/views/main/expand/table.vue");
 const Expand_Form = () => import("@/views/main/expand/form");
 const Expand_Chart = () => import("@/views/main/expand/chart");
 const Expand_Category = () => import("@/views/main/expand/category");

@@ -43,6 +43,10 @@ const options = [
     key: "@icon",
     values: "src/assets/iconfont",
   },
+  {
+    key: "@img",
+    values: "src/assets/images",
+  },
 
   /* styles */
   {
