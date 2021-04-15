@@ -1,6 +1,6 @@
 import { join } from 'path'
 
-const pathResolve = (dir: string) => join(__dirname, dir + "/");
+const pathResolve = (dir: string) => join(__dirname,'../..', dir + "/");
 
 const options = [
   {

@@ -5,14 +5,14 @@ export default {
   polyfillDynamicImport: false,
   outDir: "dist",
   assetsDir: "assets",
-  assetsInlineLimit: 4096,
+  assetsInlineLimit: 512,
   cssCodeSplit: true,
-  sourcemap: true,
+  sourcemap: false,
   rollupOptions: {
     output: {
       compact: true,
       dir: "dist",
-      format: "amd",
+      format: "esm",
     },
     // input: "src/main.ts",
     // output: [
