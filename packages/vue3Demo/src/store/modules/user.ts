@@ -12,6 +12,7 @@ const state = {
 const getters = {
   getState: (state: any, key: string) => getterVal(state, key),
   getToken: (state: any) => state.token,
+  getHWToken: (state: any) => state.hwToken,
 };
 
 const actions = {

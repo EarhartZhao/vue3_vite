@@ -9,7 +9,7 @@ const KBBASE = {
     return axios.post(`${URL}/file/save.do`, { files });
   },
   download(id) {
-    return axios.get(`${URL}/file/download.do`, { params: id });
+    return axios.get(`${URL}/file/download.do?id=${id}`);
   },
   deleteFile(id) {
     return axios.post(`${URL}/file/delete.do`, { id });
@@ -21,8 +21,8 @@ const KBBASE = {
     //page, pageSize, fileName
     return axios.post(`${URL}/file/search.do`, data);
   },
-  bind(id, huaweiKGID) {
-    return axios.post(`${URL}/file/bind.do`, { id, huaweiKGID });
+  bind(id, huaweiKgId) {
+    return axios.post(`${URL}/file/bind.do`, { id, huaweiKgId });
   },
 };
 

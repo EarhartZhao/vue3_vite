@@ -15,16 +15,14 @@ const whiteListAPI = []; // 白名单
 // 拦截器
 axios.interceptors.request.use(
   (config) => {
-    if (config.url.indexOf(cfg.BASE_URL) > -1) {
-      let token = "";
-      if (store.getters.token) {
-        token = store.getters.token;
-      } else {
-        // 返回登陆页面 应去设置触发权限拦截
-      }
-      // 设置token
-      // config.data.token = flowToken;
-      // config.headers.Authorization = token;
+    if (
+      config.url.indexOf(cfg.BASE_URL) > -1 ||
+      config.url.indexOf(cfg.HW_URL) > -1
+    ) {
+      let token = store.getters["user/getToken"] || "";
+      let hwToken = store.getters["user/getHWToken"] || "";
+      config.headers.Authorization = token;
+      // config.headers["X-Auth-Token"] = hwToken;
     } else {
     }
     return config;
@@ -64,6 +62,7 @@ axios.interceptors.response.use(
     }
   },
   (err) => {
+    console.log("axios err", err);
     ElLoading.service().close();
     if (err.response && err.response.status == "401") {
       ElMessage.error("用户信息失效，请重新登录");
