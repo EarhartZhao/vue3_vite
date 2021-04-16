@@ -17,7 +17,8 @@ axios.interceptors.request.use(
   (config) => {
     if (
       config.url.indexOf(cfg.BASE_URL) > -1 ||
-      config.url.indexOf(cfg.HW_URL) > -1
+      config.url.indexOf(cfg.HW_URL) > -1 ||
+      config.url.indexOf(cfg.UPLOAD_URL) > -1
     ) {
       let token = store.getters["user/getToken"] || "";
       let hwToken = store.getters["user/getHWToken"] || "";
@@ -43,7 +44,11 @@ axios.interceptors.response.use(
       return Promise.reject();
     }
     const url = res.config.url;
-    if (url.indexOf(cfg.BASE_URL) > -1 || url.indexOf(cfg.HW_URL) > -1) {
+    if (
+      url.indexOf(cfg.BASE_URL) > -1 ||
+      url.indexOf(cfg.HW_URL) > -1 ||
+      url.indexOf(cfg.UPLOAD_URL) > -1
+    ) {
       if (res.data && res.data.success) {
         console.log("res.data", res.data);
         return res.data.data;

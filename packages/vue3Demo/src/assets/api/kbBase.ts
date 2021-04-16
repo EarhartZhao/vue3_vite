@@ -1,9 +1,10 @@
 import { axios, cfg } from '../axios/index'
 
 const URL = cfg.HW_URL;
+const UPURL = cfg.UPLOAD_URL;
 const KBBASE = {
   upload(files) {
-    return axios.post(`${URL}/file/upload.do`, { files });
+    return axios.post(`${UPURL}/file/upload.do`, files);
   },
   saveUpload(files) {
     return axios.post(`${URL}/file/save.do`, { files });

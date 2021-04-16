@@ -7,9 +7,16 @@
         style="width: 160px"
         @search="goSearch"
       />
-      <el-button type="primary">导入</el-button>
+      <el-button type="primary" @click="dialogFormVisible = true"
+        >导入</el-button
+      >
     </div>
-    <el-table :data="data.tableData" border style="width: 100%">
+    <el-table
+      :data="data.tableData"
+      border
+      style="width: 100%"
+      empty-text="暂无数据"
+    >
       <el-table-column
         label="文件名称"
         prop="fileName"
@@ -116,30 +123,24 @@
         </template>
       </el-table-column>
     </el-table>
-    <!-- <DialogBox
+    <DialogBox
       title="文字测试"
       :show="dialogFormVisible"
       dialogWidth="400px"
       @close="hideForm"
     >
       <template #body>
-        <el-form :model="form">
-          <el-form-item label="活动名称" :label-width="formLabelWidth">
-            <el-input v-model="form.name" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="活动区域" :label-width="formLabelWidth">
-            <el-select v-model="form.region" placeholder="请选择活动区域">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
-            </el-select>
+        <el-form :model="data.form">
+          <el-form-item label="上传文件">
+            <MulUpload ref="MulUpload" @uploadData="upload" />
           </el-form-item>
         </el-form>
       </template>
       <template #footer>
         <el-button @click="hideForm">取 消</el-button>
-        <el-button type="primary" @click="sure">确 定</el-button>
+        <el-button type="primary" @click="submitForm">上 传</el-button>
       </template>
-    </DialogBox> -->
+    </DialogBox>
   </div>
 </template>
 
@@ -147,13 +148,14 @@
 import { defineComponent, reactive, onMounted, watch, ref } from "vue";
 import { ElMessage } from "element-plus";
 import DialogBox from "@comp/DialogBox.vue";
+import MulUpload from "@comp/MulUpload.vue";
 import { KBBASE } from "@api/index";
 import { downFile } from "@utils/downLoad/index";
 import Search from "@comp/Search.vue";
 export default defineComponent({
   name: "table111",
-  components: { Search, DialogBox },
-  setup(props, { emit }) {
+  components: { Search, DialogBox, MulUpload },
+  setup() {
     const data = reactive({
       searchData: {
         page: 1,
@@ -161,11 +163,38 @@ export default defineComponent({
         fileName: "",
       },
       tableData: [],
+      from: {},
     });
     let huaweiKgId: any = ref("");
+    let dialogFormVisible = ref(false);
+    let MulUpload = ref(null);
+
+    const hideForm = () => {
+      dialogFormVisible.value = false;
+    };
+
+    const submitForm = () => {
+      console.log("parent-submitForm");
+      MulUpload.value.submitUpload();
+      dialogFormVisible.value = false;
+    };
+
+    const upload = (file) => {
+      const formData = new FormData();
+
+      file.forEach((ele) => {
+        formData.append("files", ele, ele.name);
+      });
+
+      console.log("parent-formData", formData);
+      KBBASE.upload(formData).then((r) => {
+        ElMessage.success("操作成功");
+        console.log("upload", r);
+      });
+    };
 
     const generateAtlas = (row) => {
-      console.log(row);
+      // console.log(row);
       KBBASE.generateAtlas(row.id).then((r) => {
         ElMessage.success("操作成功");
         row.atlasStatus = r;
@@ -222,7 +251,7 @@ export default defineComponent({
     const goSearch = () => {
       KBBASE.search(data.searchData).then((r) => {
         data.tableData = r.list;
-        console.log("tableData get", data.tableData);
+        // console.log("tableData get", data.tableData);
       });
     };
     return {
@@ -235,6 +264,11 @@ export default defineComponent({
       deleteFile,
       showElPopover,
       huaweiKgId,
+      dialogFormVisible,
+      hideForm,
+      submitForm,
+      upload,
+      MulUpload,
     };
   },
 });
