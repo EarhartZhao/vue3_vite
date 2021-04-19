@@ -26,6 +26,21 @@
             clearable
           ></el-input>
         </el-form-item>
+        <el-form-item>
+          <el-select
+            v-model="form.projectName"
+            placeholder="请选择服务应用区域"
+            clearable
+          >
+            <el-option
+              v-for="item in areaData"
+              :key="item.area"
+              :label="item.areaName"
+              :value="item.area"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
       </template>
       <template v-else>
         <el-form-item>
@@ -55,6 +70,7 @@
 <script lang="ts">
 import router from "@utils/router/index";
 import "@styleV/base/login/index.scss";
+import areaDataJson from "./area.json";
 import { useStore } from "@store/index";
 import { reactive, defineComponent, ref } from "vue";
 import { ElMessage } from "element-plus";
@@ -63,16 +79,19 @@ export default defineComponent({
   name: "login",
   setup() {
     const store = useStore();
-    // let form = reactive({
-    //   domain: "aicyber2020",
-    //   username: "zhouyujuan",
-    //   password: "Deepthink1@3",
-    // });
+    const areaData = areaDataJson;
     let form = reactive({
-      domain: "aicyber",
-      username: "zhaoenbo",
-      password: "8820472522a",
+      domain: "aicyber2020",
+      username: "zhouyujuan",
+      password: "Deepthink1@3",
+      projectName: "cn-north-4",
     });
+    // let form = reactive({
+    //   domain: "aicyber",
+    //   username: "zhaoenbo",
+    //   password: "8820472522a",
+    //   projectName: "cn-north-4",
+    // });
     let code = ref(0);
     let loading = ref(false);
 
@@ -119,7 +138,7 @@ export default defineComponent({
     //   console.log("router-get", router().getQuery());
     //   router({ path: "/index" }).routerPush();
     // };
-    return { login, code, form, loading };
+    return { login, code, form, loading, areaData };
   },
 });
 </script>

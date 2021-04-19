@@ -7,7 +7,7 @@ const KBBASE = {
     return axios.post(`${UPURL}/file/upload.do`, files);
   },
   saveUpload(files) {
-    return axios.post(`${URL}/file/save.do`, { files });
+    return axios.post(`${URL}/file/save.do`, files);
   },
   download(id) {
     return axios.get(`${URL}/file/download.do?id=${id}`);

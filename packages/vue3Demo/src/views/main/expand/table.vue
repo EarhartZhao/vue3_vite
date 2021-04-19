@@ -132,12 +132,38 @@
       <template #body>
         <el-form :model="data.form">
           <el-form-item label="上传文件">
-            <MulUpload ref="MulUpload" @uploadData="upload" />
+            <MulUpload
+              ref="MulUpload"
+              @uploadData="upload"
+              accept=".doc,.docx"
+            />
+          </el-form-item>
+          <el-form-item
+            label="失败文件"
+            v-if="
+              data.uploadInfo.failedList &&
+              data.uploadInfo.failedList.length > 0
+            "
+          >
+            <p v-for="item in data.uploadInfo.failedList">
+              {{ item }}
+            </p>
+          </el-form-item>
+          <el-form-item
+            label="成功文件"
+            v-if="
+              data.uploadInfo.successList &&
+              data.uploadInfo.successList.length > 0
+            "
+          >
+            <p v-for="item in data.uploadInfo.successList">
+              {{ item.fileName }}
+            </p>
           </el-form-item>
         </el-form>
       </template>
       <template #footer>
-        <el-button @click="hideForm">取 消</el-button>
+        <el-button @click="hideForm">关闭</el-button>
         <el-button type="primary" @click="submitForm">上 传</el-button>
       </template>
     </DialogBox>
@@ -164,6 +190,8 @@ export default defineComponent({
       },
       tableData: [],
       from: {},
+      files: null,
+      uploadInfo: {},
     });
     let huaweiKgId: any = ref("");
     let dialogFormVisible = ref(false);
@@ -171,30 +199,36 @@ export default defineComponent({
 
     const hideForm = () => {
       dialogFormVisible.value = false;
+      data.files = null;
+      data.uploadInfo = {};
+      MulUpload.value.clearUpload();
     };
 
     const submitForm = () => {
-      console.log("parent-submitForm");
       MulUpload.value.submitUpload();
-      dialogFormVisible.value = false;
-    };
-
-    const upload = (file) => {
-      const formData = new FormData();
-
-      file.forEach((ele) => {
-        formData.append("files", ele, ele.name);
-      });
-
-      console.log("parent-formData", formData);
-      KBBASE.upload(formData).then((r) => {
+      KBBASE.upload(data.files).then((r) => {
         ElMessage.success("操作成功");
         console.log("upload", r);
+        data.uploadInfo = { ...r };
+        if (r.successList && r.successList.length > 0)
+          postSuccess(r.successList);
       });
+      // dialogFormVisible.value = false;
+    };
+
+    const postSuccess = (data) => {
+      KBBASE.saveUpload(data).then((r) => {
+        // ElMessage.success("操作成功");
+        console.log("saveUpload", r);
+        goSearch();
+      });
+    };
+
+    const upload = (files) => {
+      data.files = files;
     };
 
     const generateAtlas = (row) => {
-      // console.log(row);
       KBBASE.generateAtlas(row.id).then((r) => {
         ElMessage.success("操作成功");
         row.atlasStatus = r;

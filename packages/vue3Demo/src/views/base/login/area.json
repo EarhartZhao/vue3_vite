@@ -1,0 +1,46 @@
+[
+  {
+    "areaName": "非洲-约翰内斯堡",
+    "area": "af-south-1"
+  },
+  {
+    "areaName": "华北-北京四",
+    "area": "cn-north-4"
+  },
+  {
+    "areaName": "华北-北京一",
+    "area": "cn-north-1"
+  },
+  {
+    "areaName": "华东-上海二",
+    "area": "cn-east-2"
+  },
+  {
+    "areaName": "华东-上海一",
+    "area": "cn-east-3"
+  },
+  {
+    "areaName": "华南-广州",
+    "area": "cn-south-1"
+  },
+  {
+    "areaName": "华南-深圳",
+    "area": "cn-south-2"
+  },
+  {
+    "areaName": "西南-贵阳一",
+    "area": "cn-southwest-2"
+  },
+  {
+    "areaName": "亚太-曼谷",
+    "area": "ap-southeast-2"
+  },
+  {
+    "areaName": "亚太-香港",
+    "area": "ap-southeast-1"
+  },
+  {
+    "areaName": "亚太-新加坡",
+    "area": "ap-southeast-3"
+  }
+]
