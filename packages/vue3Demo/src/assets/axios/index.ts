@@ -23,14 +23,14 @@ axios.interceptors.request.use(
       let token = store.getters["user/getToken"] || "";
       let hwToken = store.getters["user/getHWToken"] || "";
       config.headers.Authorization = token;
-      // config.headers["X-Auth-Token"] = hwToken;
+      config.headers["X-Auth-Token"] = hwToken;
     } else {
     }
     return config;
   },
   (err) => {
     // 请求错误时的动作
-    ElLoading.service().close();
+    // ElLoading.service().close();
     Promise.reject(err);
   }
 );
@@ -68,7 +68,7 @@ axios.interceptors.response.use(
   },
   (err) => {
     console.log("axios err", err);
-    ElLoading.service().close();
+    // ElLoading.service().close();
     if (err.response && err.response.status == "401") {
       ElMessage.error("用户信息失效，请重新登录");
       // store.dispatch("LogOut").then(() => {

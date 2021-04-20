@@ -177,7 +177,7 @@ import DialogBox from "@comp/DialogBox.vue";
 import MulUpload from "@comp/MulUpload.vue";
 import { KBBASE } from "@api/index";
 import { downFile } from "@utils/downLoad/index";
-import Search from "@comp/Search.vue";
+import Search from "@/components/Search.vue";
 export default defineComponent({
   name: "table111",
   components: { Search, DialogBox, MulUpload },

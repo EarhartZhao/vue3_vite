@@ -10,7 +10,7 @@ export const views: any = {
 
   //  扩展
   Expand_Table: "main/expand/table.vue",
-  Expand_Form: "main/expand/form",
+  Expand_Form: "main/expand/form.vue",
   // :'',
 };
 
