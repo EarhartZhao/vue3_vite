@@ -1,52 +1,73 @@
 <template>
   <el-menu
     :uniqueOpened="true"
-    :default-active="defaultRouter"
+    :default-active="
+      router.currentRouter ? router.currentRouter : router.defaultRouter
+    "
     @select="selectRouter"
     class="el-menu-vertical"
   >
-    <el-submenu :index="item.path" v-for="item in routers" :key="item.path">
-      <template #title>
-        <Icon :icon="item.meta.icon" />
-        <span>{{ item.meta.title }}</span>
-      </template>
-      <el-menu-item-group>
-        <el-menu-item
-          v-for="ite in item.children"
-          :key="ite.path"
-          :index="ite.path"
-          >{{ ite.meta.title }}</el-menu-item
-        >
-      </el-menu-item-group>
-    </el-submenu>
+    <template v-for="item in router.routerData">
+      <el-submenu
+        v-if="item.children.length > 1"
+        :index="item.path"
+        :key="item.path"
+      >
+        <template #title>
+          <Icon :icon="item.meta.icon" />
+          <span>{{ item.meta.title }}</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item
+            v-for="ite in item.children"
+            :key="ite.path"
+            :index="item.path + '/' + ite.path"
+            >{{ ite.meta.title }}</el-menu-item
+          >
+        </el-menu-item-group>
+      </el-submenu>
+      <el-menu-item
+        class="el-menu-item-single"
+        :index="item.path + '/' + item.children[0].path"
+        v-if="item.children.length == 1"
+        ><Icon :icon="item.meta.icon" /><span>{{
+          item.meta.title
+        }}</span></el-menu-item
+      >
+    </template>
   </el-menu>
 </template>
 
 <script lang="ts">
-import "@styleLayout/menu/index.scss";
+import "@styleLayout/menu.scss";
 import { useStore } from "@store/index";
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive } from "vue";
 export default defineComponent({
   name: "Menu",
-  data() {
-    return {
-      // defaultRouter: "/home/index",
-    };
-  },
-  components: {},
   setup() {
     const store = useStore();
-    const routers =
-      computed(() => store.getters["router/getRouters"]).value || [];
-    const defaultRouter =
-      computed(() => store.getters["router/getDefaultRouter"]).value || "";
+    const router = reactive({
+      routerData: [],
+      defaultRouter: "",
+      currentRouter: "",
+    });
+
+    router.routerData = computed(
+      () => store.getters["router/getRouters"]
+    ).value;
+    router.defaultRouter = computed(
+      () => store.getters["router/getDefaultRouter"]
+    ).value;
+    router.currentRouter = computed(
+      () => store.getters["router/getCurrentRouter"]
+    ).value;
+
     const selectR = (key, keyPath) => {
-      // console.log("selectRouter----", key, keyPath);
-      const path = keyPath[0] + "/" + keyPath[1];
-      // console.log("store----", store);
+      const path = keyPath.length == 1 ? keyPath[0] : keyPath[1];
       store.commit("router/setCurrentRouter", path);
     };
-    return { routers, defaultRouter, selectRouter: selectR };
+
+    return { router, selectRouter: selectR };
   },
 });
 </script>

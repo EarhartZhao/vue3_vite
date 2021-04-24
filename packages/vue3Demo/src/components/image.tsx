@@ -1,8 +1,8 @@
 import '@style/component/index.scss'
 
+import Logo from '@assets/images/logo.png'
 import { defineComponent, toRefs } from 'vue'
 
-import Logo from '../assets/logo.png'
 import ImageDialog from './imageDialog'
 
 export default defineComponent({

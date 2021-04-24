@@ -5,8 +5,9 @@
   background-color: base.$white;
   // border-left: 1px solid base.$grey3;
   // border-right: 1px solid base.$grey3;
-  // padding: 10px 10px 0 10px;
+  padding: 10px 10px 0 10px;
   margin-bottom: 10px;
+  overflow: hidden;
 
   .item {
     margin: 0px 4px 10px 0px;

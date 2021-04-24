@@ -1,11 +1,12 @@
-import router from '@router/index'
 import { storeGetters, storeState } from '@types/store/index'
+// import router from '@router/index'
+import router from '@utils/router/index'
 import stronge from '@utils/stronge'
 import { ActionTree, GetterTree, MutationTree, StoreOptions } from 'vuex'
 
 const state: storeState = {
   permissionRouters: stronge.get("permissionRouters") || [],
-  getCurrentRouter: stronge.get("getCurrentRouter") || "",
+  currentRouter: stronge.get("currentRouter") || "",
 };
 
 const getters: GetterTree<storeState, storeState> & storeGetters = {
@@ -14,7 +15,7 @@ const getters: GetterTree<storeState, storeState> & storeGetters = {
     state.permissionRouters[0].path +
     "/" +
     state.permissionRouters[0].children[0].path,
-  getCurrentRouter: (state: storeState) => state.getCurrentRouter,
+  getCurrentRouter: (state: storeState) => state.currentRouter,
 };
 
 const actions: ActionTree<storeState, storeState> = {
@@ -30,8 +31,9 @@ const mutations: MutationTree<storeState> = {
     //   : stronge.set("permissionRouters", router);
   },
   setCurrentRouter(state: storeState, currentRouter: string) {
-    state.getCurrentRouter = currentRouter;
-    router.push(currentRouter);
+    state.currentRouter = currentRouter;
+    stronge.set("currentRouter", currentRouter);
+    router({ path: currentRouter }).routerPush();
   },
 };
 

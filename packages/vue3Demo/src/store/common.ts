@@ -11,3 +11,8 @@ export const commitVal = (state: any, valueObj: object) => {
     stronge.set(item, valueObj[item]);
   });
 };
+
+export const clearVal = (state: any, key: string) => {
+  state[key] = null;
+  stronge.remove(key);
+};

@@ -1,8 +1,7 @@
-import '@styleLayout/header/index.scss'
+import '@styleLayout/header.scss'
 
-import hwLogo from '@img/huawei_logo.png'
 import leaveGif from '@img/leave.gif'
-import sswLogo from '@img/ssw_logo.png'
+import Logo from '@img/logo.png'
 import { useStore } from '@store/index'
 import { ElButton, ElPopover } from 'element-plus'
 import { defineComponent, ref } from 'vue'
@@ -11,9 +10,8 @@ export default defineComponent({
   name: "Header",
   setup() {
     const store = useStore();
-    const projectItem = store.getters["system/getProjectItem"];
     let visible = ref(false);
-    let imgSrc = projectItem === "hw" ? hwLogo : sswLogo;
+    let imgSrc = Logo;
     const closePop = () => {
       visible.value = false;
     };

@@ -13,7 +13,7 @@
 <script>
 import { ParticlesOptions } from "./ParticlesOptions";
 import router from "@utils/router/index";
-import "@styleV/base/login/index.scss";
+import "@styleV/base/login.scss";
 import { useStore } from "@store/index";
 import { defineComponent } from "vue";
 export default defineComponent({

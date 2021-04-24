@@ -1,0 +1,10 @@
+[
+  {
+    "roleName": "用户",
+    "role": "user"
+  },
+  {
+    "roleName": "超管",
+    "role": "super"
+  }
+]

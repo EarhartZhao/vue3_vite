@@ -1,4 +1,4 @@
-// import '@styleLayout/menu/index.scss'
+// import '@styleLayout/menu.scss'
 
 // import { Icon, Image } from '@comp/index'
 // import { useStore } from '@store/index'

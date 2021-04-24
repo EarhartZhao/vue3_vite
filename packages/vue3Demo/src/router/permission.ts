@@ -8,9 +8,7 @@ import homeRouters from './modules/home'
 router.beforeEach(async (to: any, from: any, next: any) => {
   console.log("to", to);
 
-  const whiteList = ["/", "/forgot", "/reset"];
-
-  // console.log("store getters", store.getters["router/getRouters"]);
+  const whiteList = ["/", "/wrap", "/forgot", "/reset"];
 
   const token = store.getters["user/getToken"];
 
@@ -25,12 +23,13 @@ router.beforeEach(async (to: any, from: any, next: any) => {
   }
   // console.log("has router:", to.fullPath, router.hasRoute(to.fullPath));
   // console.log("router", router.getRoutes());
-  if (whiteList.includes(to.path)) {
-    // 白名单
-    if (token) next("/index");
-  } else {
-    if (!token) next("/");
-  }
+
+  // if (whiteList.includes(to.path)) {
+  //   // 白名单
+  //   if (token) next("/index");
+  // } else {
+  //   if (!token) next("/");
+  // }
 
   next();
 });

@@ -18,23 +18,19 @@
 </template>
 
 <script lang="ts">
-import "@styleLayout/header/index.scss";
-import hwLogo from "@img/huawei_logo.png";
+import "@styleLayout/header.scss";
 import leaveGif from "@img/leave.gif";
-import sswLogo from "@img/ssw_logo.png";
-import { useStore } from "@store/index";
+import Logo from "@img/logo.png";
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "Header",
   setup() {
-    const store = useStore();
-    const projectItem = store.getters["system/getProjectItem"];
     let visible = ref(false);
-    let imgSrc = projectItem === "hw" ? hwLogo : sswLogo;
+    let imgSrc = Logo;
     const exit = () => {
       visible.value = false;
-      console.log("exit");
+      // console.log("exit");
     };
 
     return { imgSrc, leaveGif, visible, exit };

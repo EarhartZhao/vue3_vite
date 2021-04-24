@@ -1,6 +1,6 @@
 export interface state {
   permissionRouters?: Array<any>;
-  getCurrentRouter?: String;
+  currentRouter?: String;
 }
 export interface getters {
   getRouters(s: state): Array<any>;

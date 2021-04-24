@@ -1,65 +1,33 @@
 <template>
   <div class="login_form_box">
     <el-form :model="form">
-      <template v-if="code === 0">
-        <el-form-item>
-          <el-input
-            v-model="form.domain"
-            autocomplete="off"
-            placeholder="租户名/原华为云账号"
-            clearable
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input
-            v-model="form.username"
-            autocomplete="off"
-            placeholder="IAM用户名/邮件地址"
-            clearable
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input
-            v-model="form.password"
-            autocomplete="off"
-            placeholder="IAM用户密码"
-            clearable
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-select
-            v-model="form.projectName"
-            placeholder="请选择服务应用区域"
-            clearable
+      <el-form-item>
+        <el-input
+          v-model="form.username"
+          autocomplete="off"
+          placeholder="用户名"
+          clearable
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-input
+          v-model="form.password"
+          autocomplete="off"
+          placeholder="用户密码"
+          clearable
+        ></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-select v-model="form.role" placeholder="请选择登录角色" clearable>
+          <el-option
+            v-for="item in roleData"
+            :key="item.role"
+            :label="item.roleName"
+            :value="item.role"
           >
-            <el-option
-              v-for="item in areaData"
-              :key="item.area"
-              :label="item.areaName"
-              :value="item.area"
-            >
-            </el-option>
-          </el-select>
-        </el-form-item>
-      </template>
-      <template v-else>
-        <el-form-item>
-          <el-input
-            v-model="form.huaweiId"
-            autocomplete="off"
-            placeholder="请输入id"
-            clearable
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input
-            v-model="form.mfaCode"
-            autocomplete="off"
-            placeholder="输入华为云app动态码"
-            clearable
-          ></el-input>
-        </el-form-item>
-      </template>
+          </el-option>
+        </el-select>
+      </el-form-item>
     </el-form>
     <el-button @click="login" :loading="loading" :disabled="loading"
       >登录</el-button
@@ -69,44 +37,31 @@
 
 <script lang="ts">
 import router from "@utils/router/index";
-import "@styleV/base/login/index.scss";
-import areaDataJson from "./area.json";
+import "@styleV/base/login.scss";
+import roleDataJson from "./role.json";
 import { useStore } from "@store/index";
 import { reactive, defineComponent, ref } from "vue";
 import { ElMessage } from "element-plus";
-import { HWLOGIN } from "@api/index";
+import { LOGIN } from "@api/index";
 export default defineComponent({
   name: "login",
   setup() {
     const store = useStore();
-    const areaData = areaDataJson;
+    const roleData = roleDataJson;
     let form = reactive({
-      domain: "aicyber2020",
-      username: "zhouyujuan",
-      password: "Deepthink1@3",
-      projectName: "cn-north-4",
+      username: "test001",
+      password: "123456a",
+      role: "user",
     });
-    // let form = reactive({
-    //   domain: "aicyber",
-    //   username: "zhaoenbo",
-    //   password: "8820472522a",
-    //   projectName: "cn-north-4",
-    // });
-    let code = ref(0);
     let loading = ref(false);
 
     const login = () => {
       loading.value = true;
-      HWLOGIN[code.value === 0 ? "loginByPassword" : "loginByMFA"](form)
+      router({ path: "/index" }).routerPush();
+      LOGIN.login(form)
         .then((res) => {
-          console.log("res", res);
-          code.value = res.code;
-          if (code.value === 0) {
-            saveUserData(res);
-          } else {
-            ElMessage("请进行账号验证！");
-            loading.value = false;
-          }
+          saveUserData(res);
+          loading.value = false;
         })
         .catch((e) => {
           console.log("e", e);
@@ -116,10 +71,8 @@ export default defineComponent({
 
     const saveUserData = (userInfo: any) => {
       const token = userInfo.token || "";
-      const hwToken = userInfo.huaweiToken || "";
       store.commit("user/setState", {
         token,
-        hwToken,
         userInfo,
       });
       ElMessage({
@@ -132,13 +85,7 @@ export default defineComponent({
         },
       });
     };
-
-    // const turnPage = () => {
-    //   console.log("router", router);
-    //   console.log("router-get", router().getQuery());
-    //   router({ path: "/index" }).routerPush();
-    // };
-    return { login, code, form, loading, areaData };
+    return { login, form, loading, roleData };
   },
 });
 </script>

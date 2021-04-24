@@ -9,4 +9,4 @@ import Particles from 'particles.vue3'
 
 import { app } from './app'
 
-app.use(Particles).use(ElementPlus).mount("#app");
+app.use(Particles).use(ElementPlus, { size: "small" }).mount("#app");

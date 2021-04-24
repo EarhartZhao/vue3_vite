@@ -2,21 +2,29 @@
   <div class="">
     <div class="page_func">
       <Search
-        :input.sync="data.searchData.fileName"
+        v-model:input="data.searchData.fileName"
         place="文件名称"
         style="width: 160px"
+        class="item"
         @search="goSearch"
       />
-      <el-button type="primary" @click="dialogFormVisible = true"
+      <el-button type="primary" @click="dialogFormVisible = true" class="item"
         >导入</el-button
       >
     </div>
     <el-table
       :data="data.tableData"
-      border
+      v-loading="loadTable"
       style="width: 100%"
       empty-text="暂无数据"
     >
+      <el-table-column
+        label="序号"
+        align="center"
+        width="50"
+        type="index"
+        :index="indexMethod"
+      ></el-table-column>
       <el-table-column
         label="文件名称"
         prop="fileName"
@@ -45,7 +53,7 @@
         min-width="120"
       >
       </el-table-column>
-      <el-table-column fixed="right" label="操作" align="center" width="320">
+      <el-table-column fixed="right" label="操作" align="center" width="340">
         <template #default="scope">
           <el-button
             @click="generateAtlas(scope.row)"
@@ -53,39 +61,46 @@
             size="small"
             >{{ atlaState(scope.row.atlasStatus) }}</el-button
           >
-          <!-- <el-button type="text" size="small" @click="bindAtlasId(scope.row)">{{
-            scope.row.huaweiKgId ? "编辑图谱ID" : "添加图谱ID"
-          }}</el-button> -->
           <el-popover
             placement="bottom"
-            :width="160"
-            trigger="hover"
-            v-model:visible="scope.row.visibleB"
+            :width="260"
+            trigger="click"
+            :visible="scope.row.visibleB"
           >
-            <p>
-              <el-input placeholder="请输入内容" v-model="huaweiKgId" clearable>
-              </el-input>
-            </p>
-            <div style="text-align: right; margin: 0">
-              <el-button
-                size="mini"
-                type="text"
-                @click="scope.row.visibleB = false"
-                >取消</el-button
-              >
-              <el-button
-                type="primary"
-                size="mini"
-                @click="
-                  scope.row.visibleB = false;
-                  bindAtlasId(scope.row);
-                "
-                >确定</el-button
-              >
+            <div class="popover_body">
+              <div class="popover_top">
+                <el-input
+                  placeholder="请输入图谱ID"
+                  v-model="scope.row.huaweiKgIdCopy"
+                  clearable
+                >
+                </el-input>
+              </div>
+              <div class="popover_func">
+                <el-button
+                  size="mini"
+                  type="text"
+                  @click="scope.row.visibleB = false"
+                  >取消</el-button
+                >
+                <el-button
+                  type="primary"
+                  size="mini"
+                  @click="
+                    scope.row.visibleB = false;
+                    bindAtlasId(scope.row);
+                  "
+                  >确定</el-button
+                >
+              </div>
             </div>
+
             <template #reference>
               <el-button
-                @click="scope.row.visibleB = true"
+                @click="
+                  scope.row.visibleB = true;
+                  scope.row.huaweiKgIdCopy = scope.row.huaweiKgId;
+                "
                 size="small"
                 type="text"
                 >{{
@@ -99,23 +114,25 @@
           >
           <el-popover
             placement="bottom"
-            :width="200"
-            trigger="hover"
-            v-model:visible="scope.row.visibleD"
+            :width="220"
+            trigger="click"
+            :visible="scope.row.visibleD"
           >
-            <p>删除后文件和图谱不可恢复，是否继续？</p>
-            <div style="text-align: right; margin: 0">
-              <el-button type="text" @click="scope.row.visibleD = false"
-                >取消</el-button
-              >
-              <el-button type="text" @click="deleteFile(scope.row)"
-                >确定</el-button
-              >
+            <div class="popover_body">
+              <div class="popover_top">
+                <p>删除后文件和图谱不可恢复，是否继续？</p>
+              </div>
+              <div class="popover_func">
+                <el-button type="text" @click="scope.row.visibleD = false"
+                  >取消</el-button
+                >
+                <el-button type="text" @click="deleteFile(scope.row)"
+                  >确定</el-button
+                >
+              </div>
             </div>
             <template #reference>
-              <el-button
-                type="text"
-                @click="showElPopover(scope.row, 'visibleD')"
+              <el-button type="text" @click="scope.row.visibleD = true"
                 >删除</el-button
               >
             </template>
@@ -188,12 +205,13 @@ export default defineComponent({
         pageSize: 10,
         fileName: "",
       },
+      total: 0,
       tableData: [],
       from: {},
       files: null,
       uploadInfo: {},
     });
-    let huaweiKgId: any = ref("");
+    let loadTable = ref(false);
     let dialogFormVisible = ref(false);
     let MulUpload = ref(null);
 
@@ -208,7 +226,7 @@ export default defineComponent({
       MulUpload.value.submitUpload();
       KBBASE.upload(data.files).then((r) => {
         ElMessage.success("操作成功");
-        console.log("upload", r);
+        // console.log("upload", r);
         data.uploadInfo = { ...r };
         if (r.successList && r.successList.length > 0)
           postSuccess(r.successList);
@@ -235,10 +253,6 @@ export default defineComponent({
       });
     };
 
-    const showElPopover = (row, key) => {
-      row[key] = true;
-    };
-
     const atlaState = (s) => {
       let text = "";
       switch (s) {
@@ -263,15 +277,16 @@ export default defineComponent({
     });
 
     const bindAtlasId = (row) => {
-      KBBASE.bind(row.id, huaweiKgId).then((r) => {
-        huaweiKgId = "";
+      KBBASE.bind(row.id, row.huaweiKgIdCopy).then((r) => {
+        row.huaweiKgIdCopy = "";
+        goSearch();
         ElMessage.success("操作成功");
       });
     };
 
     const deleteFile = (row) => {
       KBBASE.deleteFile(row.id).then((r) => {
-        row.visibleD = false;
+        // row.visibleD = false;
         ElMessage.success("操作成功");
       });
     };
@@ -283,26 +298,36 @@ export default defineComponent({
     };
 
     const goSearch = () => {
-      KBBASE.search(data.searchData).then((r) => {
-        data.tableData = r.list;
-        // console.log("tableData get", data.tableData);
-      });
+      loadTable.value = true;
+      KBBASE.search(data.searchData)
+        .then((r) => {
+          data.tableData = r.list;
+          loadTable.value = false;
+        })
+        .catch(() => {
+          loadTable.value = false;
+        });
     };
+
+    const indexMethod = (index) => {
+      return index + 1 + (data.searchData.page - 1) * 10;
+    };
+
     return {
       generateAtlas,
       goSearch,
       data,
+      loadTable,
       download,
       atlaState,
       bindAtlasId,
       deleteFile,
-      showElPopover,
-      huaweiKgId,
       dialogFormVisible,
       hideForm,
       submitForm,
       upload,
       MulUpload,
+      indexMethod,
     };
   },
 });

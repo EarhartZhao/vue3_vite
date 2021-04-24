@@ -1,6 +1,7 @@
 import router from '@/router'
 import cfg from '@config/index'
 import { store } from '@store/index'
+import { exitSystem } from '@utils/system/index'
 import axios from 'axios'
 import { ElLoading, ElMessage } from 'element-plus'
 
@@ -21,16 +22,13 @@ axios.interceptors.request.use(
       config.url.indexOf(cfg.UPLOAD_URL) > -1
     ) {
       let token = store.getters["user/getToken"] || "";
-      let hwToken = store.getters["user/getHWToken"] || "";
       config.headers.Authorization = token;
-      config.headers["X-Auth-Token"] = hwToken;
     } else {
     }
     return config;
   },
   (err) => {
     // 请求错误时的动作
-    // ElLoading.service().close();
     Promise.reject(err);
   }
 );
@@ -38,42 +36,30 @@ axios.interceptors.request.use(
 // 相应拦截器
 axios.interceptors.response.use(
   (res) => {
-    console.log("axios.interceptors.res", res);
+    // console.log("axios.interceptors.res", res);
     if (!res) {
       ElMessage(res.data.msg);
       return Promise.reject();
     }
     const url = res.config.url;
-    if (
-      url.indexOf(cfg.BASE_URL) > -1 ||
-      url.indexOf(cfg.HW_URL) > -1 ||
-      url.indexOf(cfg.UPLOAD_URL) > -1
-    ) {
+    if (url.indexOf(cfg.BASE_URL) > -1 || url.indexOf(cfg.UPLOAD_URL) > -1) {
       if (res.data && res.data.success) {
-        console.log("res.data", res.data);
+        // console.log("res.data", res.data);
         return res.data.data;
       } else {
         ElMessage(res.data.message);
         return Promise.reject();
       }
-    }
-    // if (url.indexOf(cfg.HW_URL) > -1) {
-    //   console.log("华为接口");
-    //   return res.data;
-    // }
-    else {
+    } else {
       //其他接口
       return res;
     }
   },
   (err) => {
     console.log("axios err", err);
-    // ElLoading.service().close();
     if (err.response && err.response.status == "401") {
       ElMessage.error("用户信息失效，请重新登录");
-      // store.dispatch("LogOut").then(() => {
-      //   router.push({ path: "/" });
-      // });
+      exitSystem();
     } else if (err.response && err.response.status == "403") {
       ElMessage.error("没有此权限");
     } else {

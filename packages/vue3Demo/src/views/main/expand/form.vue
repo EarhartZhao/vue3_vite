@@ -2,21 +2,28 @@
   <div class="">
     <div class="page_func">
       <SearchMix
+        class="item"
         :options="data.list"
-        placeholder=" xxx "
+        placeholder="语句"
         optionValue="id"
         optionKey="fileName"
-        v-model:by.sync="data.searchData.id"
-        v-model:keyword.sync="data.searchData.query"
+        v-model:by="data.searchData.id"
+        v-model:keyword="data.searchData.query"
         @search="goSearch"
       />
     </div>
     <el-table
       :data="data.tableData"
-      border
+      v-loading="loadTable"
       style="width: 100%"
       empty-text="暂无数据"
     >
+      <el-table-column
+        label="序号"
+        align="center"
+        width="50"
+        type="index"
+      ></el-table-column>
       <el-table-column
         label="实体类型"
         prop="label"
@@ -50,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted } from "vue";
+import { defineComponent, reactive, onMounted, ref } from "vue";
 import { ElMessage } from "element-plus";
 import { KBBASE } from "@api/index";
 import SearchMix from "@comp/SearchMix.vue";
@@ -68,6 +75,8 @@ export default defineComponent({
       list: [],
     });
 
+    let loadTable = ref(false);
+
     const showElPopover = (row, key) => {
       row[key] = true;
     };
@@ -78,10 +87,15 @@ export default defineComponent({
     });
 
     const goSearch = () => {
-      KBBASE.kbQuery(data.searchData).then((r) => {
-        data.tableData = r.entities;
-        // console.log("tableData get", data.tableData);
-      });
+      loadTable.value = true;
+      KBBASE.kbQuery(data.searchData)
+        .then((r) => {
+          data.tableData = r.entities;
+          loadTable.value = false;
+        })
+        .catch(() => {
+          loadTable.value = false;
+        });
     };
 
     const getList = () => {
@@ -93,6 +107,7 @@ export default defineComponent({
     return {
       goSearch,
       data,
+      loadTable,
       showElPopover,
     };
   },
