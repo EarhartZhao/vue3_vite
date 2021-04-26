@@ -30,6 +30,10 @@ const mutations: MutationTree<storeState> = {
     //   ? stronge.remove("permissionRouters")
     //   : stronge.set("permissionRouters", router);
   },
+  clearProducts(state: storeState) {
+    state.permissionRouters = [];
+    stronge.remove("permissionRouters");
+  },
   setCurrentRouter(state: storeState, currentRouter: string) {
     state.currentRouter = currentRouter;
     stronge.set("currentRouter", currentRouter);

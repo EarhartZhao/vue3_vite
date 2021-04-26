@@ -71,6 +71,7 @@ export default defineComponent({
 
     const saveUserData = (userInfo: any) => {
       const token = userInfo.token || "";
+      store.commit("router/clearProducts");
       store.commit("user/setState", {
         token,
         userInfo,
