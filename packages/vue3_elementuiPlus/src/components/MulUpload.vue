@@ -12,7 +12,7 @@
     :http-request="uploadData"
     :auto-upload="false"
     :accept="accept"
-    :limit="20"
+    :limit="10"
     multiple
   >
     <template #trigger>
@@ -27,13 +27,13 @@
       >上传到服务器</el-button
     >
     <template #tip>
-      <div class="el-upload__tip">只能上传 doc/docx 文件</div>
+      <div class="el-upload__tip">只能上传 xxxx 文件</div>
     </template>
   </el-upload>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, onMounted, reactive } from "vue";
+import { defineComponent, ref, reactive } from "vue";
 export default defineComponent({
   name: "MulUpload",
   props: {
@@ -107,4 +107,4 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

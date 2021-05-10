@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     :title="title"
-    v-model="isShow"
+    v-model="visible"
     :width="dialogWidth"
     @close="closeDialog"
     :lock-scroll="true"
@@ -18,8 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs, ref } from "vue";
-// import "@styleMain/expend/chart.scss";
+import { defineComponent, computed } from "vue";
 export default defineComponent({
   name: "DialogBox",
   props: {
@@ -37,14 +36,15 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    let isShow = ref(false);
-    const { show } = toRefs(props);
-    isShow = show;
+    const visible = computed({
+      get: () => props.show,
+      set: (val) => val,
+    });
 
     const closeDialog = () => {
       emit("close", false);
     };
-    return { closeDialog, isShow };
+    return { closeDialog, visible };
   },
 });
 </script>

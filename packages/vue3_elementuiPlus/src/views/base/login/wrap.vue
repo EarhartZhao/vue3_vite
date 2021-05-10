@@ -1,7 +1,7 @@
 <template>
   <div class="login_form_box">
-    <el-form :model="form">
-      <el-form-item>
+    <el-form :model="form" :rules="rules" ref="formRef">
+      <el-form-item prop="username">
         <el-input
           v-model="form.username"
           autocomplete="off"
@@ -9,7 +9,7 @@
           clearable
         ></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="password">
         <el-input
           v-model="form.password"
           autocomplete="off"
@@ -17,7 +17,7 @@
           clearable
         ></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="role">
         <el-select v-model="form.role" placeholder="请选择登录角色" clearable>
           <el-option
             v-for="item in roleData"
@@ -36,57 +36,48 @@
 </template>
 
 <script lang="ts">
-import router from "@utils/router/index";
 import "@styleV/base/login.scss";
-import roleDataJson from "./role.json";
-import { useStore } from "@store/index";
 import { reactive, defineComponent, ref } from "vue";
-import { ElMessage } from "element-plus";
 import { LOGIN } from "@api/index";
+import { saveUserData, turnPage, rules, roleData } from "./utils/index";
+
 export default defineComponent({
   name: "login",
   setup() {
-    const store = useStore();
-    const roleData = roleDataJson;
     let form = reactive({
       username: "test001",
       password: "123456a",
       role: "user",
     });
     let loading = ref(false);
+    let formRef = ref(null);
+
+    // const defaultRouter = computed(
+    //   () => store.getters["router/getDefaultRouter"]
+    // ).value;
+    const defaultRouter = "/index";
 
     const login = () => {
       loading.value = true;
-      router({ path: "/index" }).routerPush();
-      LOGIN.login(form)
-        .then((res) => {
-          saveUserData(res);
-          loading.value = false;
-        })
-        .catch((e) => {
-          console.log("e", e);
-          loading.value = false;
-        });
+      formRef.value.validate((vaild) => {
+        if (!vaild) {
+          return (loading.value = false);
+        }
+        return turnPage(defaultRouter);
+        LOGIN.login(form)
+          .then((res) => {
+            saveUserData(res, () => {
+              turnPage(defaultRouter);
+              loading.value = false;
+            });
+          })
+          .catch((e) => {
+            loading.value = false;
+          });
+      });
     };
 
-    const saveUserData = (userInfo: any) => {
-      const token = userInfo.token || "";
-      store.commit("router/clearProducts");
-      store.commit("user/setState", {
-        token,
-        userInfo,
-      });
-      ElMessage({
-        type: "success",
-        message: "登录成功，正在跳转中",
-        duration: 1000,
-        onClose: () => {
-          loading.value = false;
-          router({ path: "/index" }).routerPush();
-        },
-      });
-    };
-    return { login, form, loading, roleData };
+    return { login, form, loading, roleData, rules, formRef };
   },
 });
 </script>

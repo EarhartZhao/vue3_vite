@@ -2,7 +2,6 @@ export const Index = () => import("@/views/layout/index.vue");
 export const Login = () => import("@/views/base/login/index.vue");
 export const LoginWrap = () => import("@/views/base/login/wrap.vue");
 export const LoginForgot = () => import("@/views/base/login/forgot.vue");
-export const LoginReset = () => import("@/views/base/login/reset.vue");
 export const Error500 = () => import("@/views/base/errorPage/Error500");
 export const Error404 = () => import("@/views/base/errorPage/Error404");
 export const baseRouters = [
@@ -18,10 +17,6 @@ export const baseRouters = [
       {
         path: "/forgot",
         component: LoginForgot,
-      },
-      {
-        path: "/reset",
-        component: LoginReset,
       },
     ],
   },

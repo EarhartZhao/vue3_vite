@@ -18,7 +18,6 @@ axios.interceptors.request.use(
   (config) => {
     if (
       config.url.indexOf(cfg.BASE_URL) > -1 ||
-      config.url.indexOf(cfg.HW_URL) > -1 ||
       config.url.indexOf(cfg.UPLOAD_URL) > -1
     ) {
       let token = store.getters["user/getToken"] || "";

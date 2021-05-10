@@ -1,46 +1,84 @@
 <template>
-  <main>
-    <div class="login_form_box">
-      <el-form :model="form">
-        <el-form-item label="活动名称" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="活动区域" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="请选择活动区域">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
-    </div>
-  </main>
+  <div class="login_form_box">
+    <el-form :model="form" :rules="rules" ref="formRef">
+      <el-form-item prop="username">
+        <el-input
+          v-model="form.username"
+          autocomplete="off"
+          placeholder="用户名"
+          clearable
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input
+          v-model="form.password"
+          autocomplete="off"
+          placeholder="用户密码"
+          clearable
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="role">
+        <el-select v-model="form.role" placeholder="请选择登录角色" clearable>
+          <el-option
+            v-for="item in roleData"
+            :key="item.role"
+            :label="item.roleName"
+            :value="item.role"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
+    </el-form>
+    <el-button @click="login" :loading="loading" :disabled="loading"
+      >登录</el-button
+    >
+  </div>
 </template>
 
-<script>
-import { ParticlesOptions } from "./ParticlesOptions";
-import router from "@utils/router/index";
+<script lang="ts">
 import "@styleV/base/login.scss";
-import { useStore } from "@store/index";
-import { reactive, defineComponent, computed, ref, onMounted } from "vue";
+import { reactive, defineComponent, ref } from "vue";
+import { LOGIN } from "@api/index";
+import { saveUserData, turnPage, rules, roleData } from "./utils/index";
+
 export default defineComponent({
   name: "login",
-  data() {
-    return {
-      ParticlesOptions,
-      form: {},
-    };
-  },
   setup() {
-    const store = useStore();
-    // let projectItem = store.getters("projectItem");
+    let form = reactive({
+      username: "test001",
+      password: "123456a",
+      role: "user",
+    });
+    let loading = ref(false);
+    let formRef = ref(null);
 
-    const turnPage = () => {
-      // this.$router.push("/index");
-      console.log("router", router);
-      console.log("router-get", router().getQuery());
-      router({ path: "/index" }).routerPush();
+    // 动态获取路由权限时，可以获取默认路由(路由权限的第一个路由)
+    // const defaultRouter = computed(
+    //   () => store.getters["router/getDefaultRouter"]
+    // ).value;
+    const defaultRouter = "/index";
+
+    const login = () => {
+      loading.value = true;
+      formRef.value.validate((vaild) => {
+        if (!vaild) {
+          return (loading.value = false);
+        }
+        return turnPage(defaultRouter);
+        LOGIN.login(form)
+          .then((res) => {
+            saveUserData(res, () => {
+              turnPage(defaultRouter);
+              loading.value = false;
+            });
+          })
+          .catch((e) => {
+            loading.value = false;
+          });
+      });
     };
-    return { turnPage };
+
+    return { login, form, loading, roleData, rules, formRef };
   },
 });
 </script>

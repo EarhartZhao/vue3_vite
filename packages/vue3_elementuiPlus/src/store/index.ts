@@ -2,7 +2,6 @@ import { storeState } from '@types/store/index'
 import { InjectionKey } from 'vue'
 import { createLogger, createStore, useStore as baseUseStore, Store as VuexStore } from 'vuex'
 
-import chartForm from './modules/chartForm'
 import router from './modules/router'
 import system from './modules/system'
 import user from './modules/user'
@@ -14,7 +13,6 @@ export const key: InjectionKey<VuexStore<storeState>> = Symbol();
 export const store = createStore({
   modules: {
     router,
-    chartForm,
     system,
     user,
   },

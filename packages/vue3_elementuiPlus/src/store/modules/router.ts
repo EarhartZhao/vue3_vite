@@ -1,6 +1,4 @@
 import { storeGetters, storeState } from '@types/store/index'
-// import router from '@router/index'
-import router from '@utils/router/index'
 import stronge from '@utils/stronge'
 import { ActionTree, GetterTree, MutationTree, StoreOptions } from 'vuex'
 
@@ -26,9 +24,6 @@ const mutations: MutationTree<storeState> = {
   setProducts(state: storeState, router: Array<any>) {
     state.permissionRouters = router;
     stronge.set("permissionRouters", router);
-    // router.length > 0
-    //   ? stronge.remove("permissionRouters")
-    //   : stronge.set("permissionRouters", router);
   },
   clearProducts(state: storeState) {
     state.permissionRouters = [];
@@ -37,7 +32,6 @@ const mutations: MutationTree<storeState> = {
   setCurrentRouter(state: storeState, currentRouter: string) {
     state.currentRouter = currentRouter;
     stronge.set("currentRouter", currentRouter);
-    router({ path: currentRouter }).routerPush();
   },
 };
 

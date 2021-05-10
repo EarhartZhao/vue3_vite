@@ -8,7 +8,7 @@ import homeRouters from './modules/home'
 router.beforeEach(async (to: any, from: any, next: any) => {
   console.log("to", to);
 
-  const whiteList = ["/", "/wrap", "/forgot", "/reset"];
+  const whiteList = ["/", "/wrap", "/forgot"];
 
   const token = store.getters["user/getToken"];
 

@@ -3,7 +3,6 @@
     v-model="name"
     :placeholder="`输入${place}搜索`"
     :style="`width: ${width}px`"
-    suffix-icon="el-icon-search"
     @keyup.enter.native="search"
     clearable
   ></el-input>
@@ -27,9 +26,8 @@ export default defineComponent({
       default: "",
     },
   },
-  setup(props, { emit }) {
+  setup(_, { emit }) {
     let name = ref("");
-    // const { input } = toRefs(props);
 
     onMounted(() => {
       emit("update:input", name.value);

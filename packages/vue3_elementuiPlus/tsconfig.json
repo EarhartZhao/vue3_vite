@@ -38,6 +38,7 @@
   },
   "include": [
     "src/**/*.ts",
+    "src/**/**/*.ts",
     "src/*.tsx",
     "src/**/*.tsx",
     "src/**/**/*.tsx",
@@ -46,18 +47,11 @@
     "src/**/*.vue",
     "src/**/**/*.vue",
     "src/**/**/**/*.vue",
+    "src/**/**/**/**/*.vue",
     "src/types/images.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    "typings",
-    "src/assets/utils/print.ts",
-    "src/views/main/expand/chart.vue",
-    "src/views/base/login/reset.vue",
-    "src/views/base/login/forgot.vue",
-    "src/views/base/login/wrap.vue",
-    "src/components/mulUpload.vue",
-    "src/components/SearchMix.vue",
-    "src/components/Search.vue"
+    "typings"
   ],
   "exclude": ["node_modules", "dist"]
 }

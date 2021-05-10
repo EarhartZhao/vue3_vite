@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { ParticlesOptions } from "./ParticlesOptions";
+import { ParticlesOptions } from "./utils/ParticlesOptions";
 import router from "@utils/router/index";
 import "@styleV/base/login.scss";
 import { useStore } from "@store/index";

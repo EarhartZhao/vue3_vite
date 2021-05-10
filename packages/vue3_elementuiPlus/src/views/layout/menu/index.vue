@@ -41,6 +41,7 @@
 <script lang="ts">
 import "@styleLayout/menu.scss";
 import { useStore } from "@store/index";
+import { default as routerFunc } from "@utils/router/index";
 import { computed, defineComponent, reactive, watch } from "vue";
 export default defineComponent({
   name: "Menu",
@@ -71,7 +72,7 @@ export default defineComponent({
 
     const selectR = (key, keyPath) => {
       const path = keyPath.length == 1 ? keyPath[0] : keyPath[1];
-      store.commit("router/setCurrentRouter", path);
+      routerFunc({ path: path }).routerPush();
     };
 
     return { router, selectRouter: selectR };
