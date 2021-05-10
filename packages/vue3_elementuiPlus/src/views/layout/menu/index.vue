@@ -41,7 +41,7 @@
 <script lang="ts">
 import "@styleLayout/menu.scss";
 import { useStore } from "@store/index";
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, reactive, watch } from "vue";
 export default defineComponent({
   name: "Menu",
   setup() {
@@ -58,9 +58,16 @@ export default defineComponent({
     router.defaultRouter = computed(
       () => store.getters["router/getDefaultRouter"]
     ).value;
-    router.currentRouter = computed(
-      () => store.getters["router/getCurrentRouter"]
-    ).value;
+    watch(
+      () => store.getters["router/getCurrentRouter"],
+      (val) => {
+        router.currentRouter = val;
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
 
     const selectR = (key, keyPath) => {
       const path = keyPath.length == 1 ? keyPath[0] : keyPath[1];

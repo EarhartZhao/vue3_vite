@@ -12,8 +12,8 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "isolatedModules": true,
-    "suppressImplicitAnyIndexErrors":true,
-    "types": ["element-plus", "axios", "vite/client", "node", "antv/g6"],
+    "suppressImplicitAnyIndexErrors": true,
+    "types": ["element-plus", "axios", "vite/client", "node"],
     "jsx": "preserve",
     "paths": {
       "@config/*": ["config/*"],
@@ -32,14 +32,9 @@
       "@styleV/*": ["src/assets/styles/views/*"],
       "@styleBase/*": ["src/assets/styles/views/base/*"],
       "@styleLayout/*": ["src/assets/styles/views/layout/*"],
-      "@styleMain/*": ["src/assets/styles/views/main/*"],
+      "@styleMain/*": ["src/assets/styles/views/main/*"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   "include": [
     "src/**/*.ts",
@@ -54,7 +49,15 @@
     "src/types/images.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    "typings", "src/assets/utils/print.ts", "src/views/main/expand/chart.vue", "src/views/base/login/reset.vue", "src/views/base/login/forgot.vue", "src/views/base/login/wrap.vue", "src/components/mulUpload.vue", "src/components/SearchMix.vue", "src/components/Search.vue",
+    "typings",
+    "src/assets/utils/print.ts",
+    "src/views/main/expand/chart.vue",
+    "src/views/base/login/reset.vue",
+    "src/views/base/login/forgot.vue",
+    "src/views/base/login/wrap.vue",
+    "src/components/mulUpload.vue",
+    "src/components/SearchMix.vue",
+    "src/components/Search.vue"
   ],
   "exclude": ["node_modules", "dist"]
 }
