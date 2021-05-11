@@ -1,4 +1,4 @@
-import KBBASE from './kbBase'
 import LOGIN from './login'
+import TABLE from './table'
 
-export { LOGIN, KBBASE };
+export { LOGIN, TABLE };

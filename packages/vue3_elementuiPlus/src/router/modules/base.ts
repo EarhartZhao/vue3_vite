@@ -6,12 +6,13 @@ export const Error500 = () => import("@/views/base/errorPage/Error500");
 export const Error404 = () => import("@/views/base/errorPage/Error404");
 export const baseRouters = [
   {
-    path: "/loginwrap",
+    path: "/",
     name: "Login",
     component: Login,
+    redirect: "/wrap",
     children: [
       {
-        path: "/",
+        path: "/wrap",
         component: LoginWrap,
       },
       {

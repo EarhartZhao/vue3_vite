@@ -55,7 +55,7 @@ export default defineComponent({
     // const defaultRouter = computed(
     //   () => store.getters["router/getDefaultRouter"]
     // ).value;
-    const defaultRouter = "/index";
+    const defaultRouter = "/home/index";
 
     const login = () => {
       loading.value = true;
@@ -63,7 +63,7 @@ export default defineComponent({
         if (!vaild) {
           return (loading.value = false);
         }
-        return turnPage(defaultRouter);
+        // return turnPage(defaultRouter);
         LOGIN.login(form)
           .then((res) => {
             saveUserData(res, () => {

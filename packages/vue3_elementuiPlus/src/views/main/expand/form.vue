@@ -59,7 +59,7 @@
 <script lang="ts">
 import { defineComponent, reactive, onMounted, ref } from "vue";
 import { ElMessage } from "element-plus";
-import { KBBASE } from "@api/index";
+// import { KBBASE } from "@api/index";
 import SearchMix from "@comp/SearchMix.vue";
 export default defineComponent({
   name: "table111",
@@ -88,21 +88,9 @@ export default defineComponent({
 
     const goSearch = () => {
       loadTable.value = true;
-      KBBASE.kbQuery(data.searchData)
-        .then((r) => {
-          data.tableData = r.entities;
-          loadTable.value = false;
-        })
-        .catch(() => {
-          loadTable.value = false;
-        });
     };
 
-    const getList = () => {
-      KBBASE.list().then((r) => {
-        data.list = r.list;
-      });
-    };
+    const getList = () => {};
 
     return {
       goSearch,

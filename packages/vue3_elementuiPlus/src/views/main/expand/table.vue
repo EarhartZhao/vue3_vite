@@ -1,190 +1,120 @@
 <template>
-  <div class="">
-    <div class="page_func">
-      <Search
-        v-model:input="data.searchData.fileName"
-        place="文件名称"
-        style="width: 160px"
-        class="item"
-        @search="goSearch"
-      />
-      <el-button type="primary" @click="dialogFormVisible = true" class="item"
-        >导入</el-button
-      >
-    </div>
-    <el-table
-      :data="data.tableData"
-      v-loading="loadTable"
-      style="width: 100%"
-      empty-text="暂无数据"
+  <div class="page_func">
+    <Search
+      v-model:input="data.searchData.fileName"
+      place="名称"
+      style="width: 160px"
+      class="item"
+      @search="goSearch"
+    />
+    <el-button type="primary" @click="dialogFormVisible = true" class="item"
+      >导入</el-button
     >
-      <el-table-column
-        label="序号"
-        align="center"
-        width="50"
-        type="index"
-        :index="indexMethod"
-      ></el-table-column>
-      <el-table-column
-        label="文件名称"
-        prop="fileName"
-        align="center"
-        min-width="120"
-      >
-      </el-table-column>
-      <el-table-column
-        label="导入时间"
-        prop="createTime"
-        align="center"
-        min-width="120"
-      >
-      </el-table-column>
-      <el-table-column
-        label="生成时间"
-        prop="atlasCreateTime"
-        align="center"
-        min-width="120"
-      >
-      </el-table-column>
-      <el-table-column
-        label="图谱ID"
-        prop="huaweiKgId"
-        align="center"
-        min-width="120"
-      >
-      </el-table-column>
-      <el-table-column fixed="right" label="操作" align="center" width="340">
-        <template #default="scope">
-          <el-button
-            @click="generateAtlas(scope.row)"
-            type="text"
-            size="small"
-            >{{ atlaState(scope.row.atlasStatus) }}</el-button
-          >
-          <el-popover
-            placement="bottom"
-            :width="260"
-            trigger="click"
-            :visible="scope.row.visibleB"
-          >
-            <div class="popover_body">
-              <div class="popover_top">
-                <el-input
-                  placeholder="请输入图谱ID"
-                  v-model="scope.row.huaweiKgIdCopy"
-                  clearable
-                >
-                </el-input>
-              </div>
-              <div class="popover_func">
-                <el-button
-                  size="mini"
-                  type="text"
-                  @click="scope.row.visibleB = false"
-                  >取消</el-button
-                >
-                <el-button
-                  type="primary"
-                  size="mini"
-                  @click="
-                    scope.row.visibleB = false;
-                    bindAtlasId(scope.row);
-                  "
-                  >确定</el-button
-                >
-              </div>
-            </div>
-
-            <template #reference>
-              <el-button
-                @click="
-                  scope.row.visibleB = true;
-                  scope.row.huaweiKgIdCopy = scope.row.huaweiKgId;
-                "
-                size="small"
-                type="text"
-                >{{
-                  scope.row.huaweiKgId ? "编辑图谱ID" : "添加图谱ID"
-                }}</el-button
-              >
-            </template>
-          </el-popover>
-          <el-button type="text" size="small" @click="download(scope.row)"
-            >下载</el-button
-          >
-          <el-popover
-            placement="bottom"
-            :width="220"
-            trigger="click"
-            :visible="scope.row.visibleD"
-          >
-            <div class="popover_body">
-              <div class="popover_top">
-                <p>删除后文件和图谱不可恢复，是否继续？</p>
-              </div>
-              <div class="popover_func">
-                <el-button type="text" @click="scope.row.visibleD = false"
-                  >取消</el-button
-                >
-                <el-button type="text" @click="deleteFile(scope.row)"
-                  >确定</el-button
-                >
-              </div>
-            </div>
-            <template #reference>
-              <el-button type="text" @click="scope.row.visibleD = true"
-                >删除</el-button
-              >
-            </template>
-          </el-popover>
-        </template>
-      </el-table-column>
-    </el-table>
-    <DialogBox
-      title="文字测试"
-      :show="dialogFormVisible"
-      dialogWidth="400px"
-      @close="hideForm"
-    >
-      <template #body>
-        <el-form :model="data.form">
-          <el-form-item label="上传文件">
-            <MulUpload
-              ref="MulUpload"
-              @uploadData="upload"
-              accept=".doc,.docx"
-            />
-          </el-form-item>
-          <el-form-item
-            label="失败文件"
-            v-if="
-              data.uploadInfo.failedList &&
-              data.uploadInfo.failedList.length > 0
-            "
-          >
-            <p v-for="item in data.uploadInfo.failedList">
-              {{ item }}
-            </p>
-          </el-form-item>
-          <el-form-item
-            label="成功文件"
-            v-if="
-              data.uploadInfo.successList &&
-              data.uploadInfo.successList.length > 0
-            "
-          >
-            <p v-for="item in data.uploadInfo.successList">
-              {{ item.fileName }}
-            </p>
-          </el-form-item>
-        </el-form>
-      </template>
-      <template #footer>
-        <el-button @click="hideForm">关闭</el-button>
-        <el-button type="primary" @click="submitForm">上 传</el-button>
-      </template>
-    </DialogBox>
   </div>
+  <el-table
+    :data="data.tableData"
+    v-loading="loadTable"
+    style="width: 100%"
+    empty-text="暂无数据"
+  >
+    <el-table-column
+      label="序号"
+      align="center"
+      width="50"
+      type="index"
+      :index="indexMethod"
+    ></el-table-column>
+    <el-table-column
+      label="文件名称"
+      prop="title"
+      align="center"
+      min-width="120"
+    ></el-table-column>
+    <el-table-column
+      label="id"
+      prop="id"
+      align="center"
+      min-width="120"
+    ></el-table-column>
+    <el-table-column
+      label="属性1"
+      prop="attr1"
+      align="center"
+      min-width="120"
+    ></el-table-column>
+    <el-table-column
+      label="属性2"
+      prop="attr2"
+      align="center"
+      min-width="120"
+    ></el-table-column>
+    <el-table-column label="属性3" align="center" :width="200">
+      <template #default="scope">
+        <div class="table_edit">
+          <template v-if="!scope.row.visibleB">
+            <p>{{ scope.row.attr3 }}</p>
+          </template>
+          <template v-else>
+            <el-input
+              placeholder="请输入"
+              v-model="scope.row.attrCopy"
+              clearable
+            ></el-input>
+            <i class="el-icon-circle-check" @click="saveAttr(scope.row)" />
+            <i
+              class="el-icon-circle-close"
+              @click="scope.row.visibleB = false"
+            />
+          </template>
+        </div>
+      </template>
+    </el-table-column>
+    <el-table-column fixed="right" label="操作" align="center" width="180">
+      <template #default="scope">
+        <el-button @click="editAttr(scope.row)" size="small" type="text"
+          >编辑属性3</el-button
+        >
+        <el-popconfirm
+          confirmButtonText="确定"
+          cancelButtonText="取消"
+          icon="el-icon-info"
+          iconColor="red"
+          title="删除后文件不可恢复，是否继续？"
+          @confirm="deleteFile(scope.row)"
+        >
+          <template #reference>
+            <el-button type="text" class="delete">删除</el-button>
+          </template>
+        </el-popconfirm>
+      </template>
+    </el-table-column>
+  </el-table>
+
+  <Page
+    :total="data.total"
+    :pageSize="data.searchData.pageSize"
+    v-model:page="data.searchData.page"
+    @change="goSearch"
+  />
+
+  <DialogBox
+    title="弹框"
+    :show="dialogFormVisible"
+    dialogWidth="400px"
+    @close="hideForm"
+  >
+    <template #body>
+      <el-form :model="data.form">
+        <el-form-item label="上传文件">
+          <MulUpload ref="MulUpload" @uploadData="upload" accept="." />
+        </el-form-item>
+      </el-form>
+    </template>
+    <template #footer>
+      <el-button @click="hideForm">关闭</el-button>
+      <el-button type="primary" @click="submitForm">上传</el-button>
+    </template>
+  </DialogBox>
 </template>
 
 <script lang="ts">
@@ -192,12 +122,12 @@ import { defineComponent, reactive, onMounted, watch, ref } from "vue";
 import { ElMessage } from "element-plus";
 import DialogBox from "@comp/DialogBox.vue";
 import MulUpload from "@comp/MulUpload.vue";
-import { KBBASE } from "@api/index";
-import { downFile } from "@utils/downLoad/index";
+import { TABLE } from "@api/index";
 import Search from "@/components/Search.vue";
+import Page from "@/components/Page.vue";
 export default defineComponent({
-  name: "table111",
-  components: { Search, DialogBox, MulUpload },
+  name: "tableEX",
+  components: { Search, DialogBox, MulUpload, Page },
   setup() {
     const data = reactive({
       searchData: {
@@ -209,7 +139,6 @@ export default defineComponent({
       tableData: [],
       from: {},
       files: null,
-      uploadInfo: {},
     });
     let loadTable = ref(false);
     let dialogFormVisible = ref(false);
@@ -218,90 +147,39 @@ export default defineComponent({
     const hideForm = () => {
       dialogFormVisible.value = false;
       data.files = null;
-      data.uploadInfo = {};
       MulUpload.value.clearUpload();
     };
 
     const submitForm = () => {
       MulUpload.value.submitUpload();
-      KBBASE.upload(data.files).then((r) => {
-        ElMessage.success("操作成功");
-        // console.log("upload", r);
-        data.uploadInfo = { ...r };
-        if (r.successList && r.successList.length > 0)
-          postSuccess(r.successList);
-      });
       // dialogFormVisible.value = false;
-    };
-
-    const postSuccess = (data) => {
-      KBBASE.saveUpload(data).then((r) => {
-        // ElMessage.success("操作成功");
-        console.log("saveUpload", r);
-        goSearch();
-      });
     };
 
     const upload = (files) => {
       data.files = files;
     };
-
-    const generateAtlas = (row) => {
-      KBBASE.generateAtlas(row.id).then((r) => {
-        ElMessage.success("操作成功");
-        row.atlasStatus = r;
-      });
+    const editAttr = (row) => {
+      row.visibleB = true;
+      row.attrCopy = row.attr3;
     };
-
-    const atlaState = (s) => {
-      let text = "";
-      switch (s) {
-        case 0:
-          text = "未生成";
-          break;
-        case 1:
-          text = "生成中";
-          break;
-        case 2:
-          text = "生成完毕";
-          break;
-        default:
-          text = "error";
-          break;
-      }
-      return text;
+    const saveAttr = (row) => {
+      if (!row.attrCopy) return ElMessage("属性不能为空！");
+      row.visibleB = false;
+      row.attr3 = row.attrCopy;
+      ElMessage.success("操作成功");
     };
 
     onMounted(() => {
       goSearch();
     });
 
-    const bindAtlasId = (row) => {
-      KBBASE.bind(row.id, row.huaweiKgIdCopy).then((r) => {
-        row.huaweiKgIdCopy = "";
-        goSearch();
-        ElMessage.success("操作成功");
-      });
-    };
-
-    const deleteFile = (row) => {
-      KBBASE.deleteFile(row.id).then((r) => {
-        // row.visibleD = false;
-        ElMessage.success("操作成功");
-      });
-    };
-
-    const download = (row) => {
-      KBBASE.download(row.id).then((r) => {
-        downFile("测试文件", r);
-      });
-    };
+    const deleteFile = (row) => {};
 
     const goSearch = () => {
       loadTable.value = true;
-      KBBASE.search(data.searchData)
+      TABLE.search(data.searchData)
         .then((r) => {
-          data.tableData = r.list;
+          data.tableData = r;
           loadTable.value = false;
         })
         .catch(() => {
@@ -314,13 +192,9 @@ export default defineComponent({
     };
 
     return {
-      generateAtlas,
       goSearch,
       data,
       loadTable,
-      download,
-      atlaState,
-      bindAtlasId,
       deleteFile,
       dialogFormVisible,
       hideForm,
@@ -328,7 +202,25 @@ export default defineComponent({
       upload,
       MulUpload,
       indexMethod,
+      saveAttr,
+      editAttr,
     };
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.table_edit {
+  display: flex;
+  align-items: center;
+  p {
+    text-align: center;
+    width: 100%;
+  }
+  i {
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 0 0 4px;
+  }
+}
+</style>

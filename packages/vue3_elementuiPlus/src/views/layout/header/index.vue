@@ -22,6 +22,7 @@ import "@styleLayout/header.scss";
 import leaveGif from "@img/leave.gif";
 import Logo from "@img/logo.png";
 import { defineComponent, ref } from "vue";
+import { exitSystem } from "@utils/system/index";
 
 export default defineComponent({
   name: "Header",
@@ -30,7 +31,7 @@ export default defineComponent({
     let imgSrc = Logo;
     const exit = () => {
       visible.value = false;
-      // console.log("exit");
+      exitSystem();
     };
 
     return { imgSrc, leaveGif, visible, exit };

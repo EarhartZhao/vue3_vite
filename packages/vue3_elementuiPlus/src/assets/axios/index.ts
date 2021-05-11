@@ -35,18 +35,17 @@ axios.interceptors.request.use(
 // 相应拦截器
 axios.interceptors.response.use(
   (res) => {
-    // console.log("axios.interceptors.res", res);
+    console.log("axios.interceptors.res", res);
     if (!res) {
       ElMessage(res.data.msg);
       return Promise.reject();
     }
     const url = res.config.url;
     if (url.indexOf(cfg.BASE_URL) > -1 || url.indexOf(cfg.UPLOAD_URL) > -1) {
-      if (res.data && res.data.success) {
-        // console.log("res.data", res.data);
+      if (res.data && res.data.status === 0) {
         return res.data.data;
       } else {
-        ElMessage(res.data.message);
+        ElMessage(res.data.msg);
         return Promise.reject();
       }
     } else {

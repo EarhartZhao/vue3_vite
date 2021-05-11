@@ -22,19 +22,18 @@ export const roleData = [
 
 export const formData = reactive({
   form: {
-    username: "13821918251",
-    password: "Deepthink1@3",
+    username: "123",
+    password: "123",
   },
 });
 
-export const saveUserData = (userInfo: any, callback: Function) => {
-  const token = userInfo.token || "";
-  const hwToken = userInfo.huaweiToken || "";
+export const saveUserData = (userData: any, callback: Function) => {
+  const token = userData.token || "";
+  const userName = userData.userName || "";
   store.commit("router/clearProducts");
   store.commit("user/setState", {
     token,
-    hwToken,
-    userInfo,
+    userName,
   });
   ElMessage({
     type: "success",

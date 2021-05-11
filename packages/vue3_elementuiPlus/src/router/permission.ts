@@ -6,7 +6,7 @@ import expandRouters from './modules/expand'
 import homeRouters from './modules/home'
 
 router.beforeEach(async (to: any, from: any, next: any) => {
-  console.log("to", to);
+  // console.log("to", to);
 
   const whiteList = ["/", "/wrap", "/forgot"];
 
@@ -24,12 +24,12 @@ router.beforeEach(async (to: any, from: any, next: any) => {
   // console.log("has router:", to.fullPath, router.hasRoute(to.fullPath));
   // console.log("router", router.getRoutes());
 
-  // if (whiteList.includes(to.path)) {
-  //   // 白名单
-  //   if (token) next("/index");
-  // } else {
-  //   if (!token) next("/");
-  // }
+  if (whiteList.includes(to.path)) {
+    // 白名单
+    if (token) next("/home/index");
+  } else {
+    if (!token) next("/");
+  }
 
   next();
 });
