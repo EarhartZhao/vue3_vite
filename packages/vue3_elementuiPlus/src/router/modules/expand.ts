@@ -2,6 +2,7 @@ import { Index } from './base'
 
 const Expand_Table = () => import("@/views/main/expand/table.vue");
 const Expand_Form = () => import("@/views/main/expand/form.vue");
+const Expand_TestTimeout = () => import("@/views/main/expand/testTimeout.vue");
 
 const expandRouters = {
   path: "/expand",
@@ -30,6 +31,16 @@ const expandRouters = {
       name: "Expand_Form",
       meta: {
         title: "表单",
+        noCache: true,
+        icon: "",
+      },
+    },
+    {
+      path: "testTimeout",
+      component: Expand_TestTimeout,
+      name: "Expand_TestTimeout",
+      meta: {
+        title: "测试延迟",
         noCache: true,
         icon: "",
       },

@@ -53,7 +53,7 @@
   },
   "[typescript]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "vscode.typescript-language-features",
     "preferences.importModuleSpecifier": "non-relative",
     // "tsdk": "node_modules/typescript/lib",
     "referencesCodeLens.enabled": true
