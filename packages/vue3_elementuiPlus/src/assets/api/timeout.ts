@@ -1,6 +1,6 @@
 import {} from '@utils/timeout/interceptHttp'
 
-import { axios, cfg, intercept } from '../axios/intercept'
+import { axios, cfg } from '../axios/index'
 
 const URL = cfg.BASE_URL;
 const TIMEOUT = {
@@ -8,7 +8,7 @@ const TIMEOUT = {
     return axios.get(`${URL}/timeout/${time}`);
   },
   searchIntercept(time) {
-    return intercept.get(`${URL}/timeout/${time}`);
+    return axios.get(`${URL}/timeout/${time}`);
   },
 };
 

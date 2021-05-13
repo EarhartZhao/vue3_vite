@@ -2,6 +2,7 @@ import router from '@/router'
 import cfg from '@config/index'
 import { store } from '@store/index'
 import { exitSystem } from '@utils/system/index'
+import interceptHttp from '@utils/timeout/interceptHttp'
 import axios from 'axios'
 import { ElLoading, ElMessage } from 'element-plus'
 
@@ -12,6 +13,8 @@ Object.assign(axios.defaults, {
 });
 
 const whiteListAPI = []; // 白名单
+
+const interceptHttpRequest = interceptHttp({ throttle: 3000 })
 
 // 拦截器
 axios.interceptors.request.use(
@@ -24,7 +27,9 @@ axios.interceptors.request.use(
       config.headers.Authorization = token;
     } else {
     }
-    return config;
+
+    // return config;
+    return interceptHttpRequest.request(config);
   },
   (err) => {
     // 请求错误时的动作

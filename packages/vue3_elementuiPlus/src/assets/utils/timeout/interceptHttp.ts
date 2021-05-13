@@ -36,6 +36,7 @@ class interceptHttp {
       this.list[RO.id] = [];
     }
     if (!this.throttle) { }
+    return RO;
   }
 
   turnString = (data: any) => typeof (data) === 'string' ? data : String(data);
