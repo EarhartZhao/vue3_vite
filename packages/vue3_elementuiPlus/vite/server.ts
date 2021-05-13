@@ -1,6 +1,6 @@
 export default {
   host: "localhost",
-  port: 3001,
+  port: 3002,
   // strictPort: false,
   // https: false,
   // open: false,

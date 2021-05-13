@@ -13,7 +13,7 @@ interface InterceptHttpRequestOption {
   props?: any,  //请求参数
 }
 
-export class interceptHttp {
+class interceptHttp {
   // id: string;
   // path: string;
   // props?: any;
@@ -25,7 +25,7 @@ export class interceptHttp {
     // this.id = options.id;
     // this.path = options.path;
     // this.props = this.turnString(options.props);
-    this.throttle = options.throttle;
+    this.throttle = options.throttle || 500;
     this.list = {};
     this.idArr = [];  //id缓存
   }
@@ -54,3 +54,5 @@ const throttle = (fn: Function, wait: number) => {  //节流函数
     }
   }
 }
+
+export default (options: InterceptHttpOption) => new interceptHttp(options);
