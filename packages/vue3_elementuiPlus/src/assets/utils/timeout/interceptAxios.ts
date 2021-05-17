@@ -6,7 +6,7 @@
 
 import { AxiosRequestConfig, CancelTokenSource } from 'axios'
 
-import { interceptAxiosProxy } from './interceptAxiosProxy'
+import { interceptAxiosProxy, observe } from './interceptAxiosProxy'
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
@@ -30,15 +30,25 @@ class interceptAxios {
   axiosSource: CancelTokenSource;
   private list: object;
   private idArr: Array<string>;
+  private AxiosRequestRO: object;
 
   constructor(options: InterceptAxiosOptionInterface) {
     this.throttle = options.throttle || 500;
     this.axiosSource = options.axiosSource;
-    this.list = interceptAxiosProxy({});
+    this.list = {};
     this.idArr = [];  //id缓存
+    this.AxiosRequestRO = interceptAxiosProxy({})
   }
 
   request = (RO: AxiosRequestConfig): AxiosRequestConfig => {
+    // const AxiosRequestRO = interceptAxiosProxy(RO)  // 代理
+    console.log('request this.AxiosRequestRO 1', this.AxiosRequestRO)
+    this.AxiosRequestRO.url = RO.url;
+    console.log('request this.AxiosRequestRO 2', this.AxiosRequestRO)
+    const AxiosRequestROPrint = () => {
+      console.log('AxiosRequestROPrint ------', this.AxiosRequestRO)
+    }
+    observe(AxiosRequestROPrint)
     if (!this.idArr.includes(RO.interceptAxiosId)) {
       this.idArr.push(RO.interceptAxiosId);
       this.list[RO.interceptAxiosId] = [];
@@ -47,10 +57,9 @@ class interceptAxios {
 
     RO.cancelToken = this.axiosSource.token;
     // this.axiosSource.cancel('interceptAxiosCancel')
-    console.log('this.axiosSource', this.axiosSource)
     console.log('ro', RO)
 
-    console.log('this.list', this.list['TIMEOUT'])
+    // console.log('this.list', this.list['TIMEOUT'])
 
     // const data = {
     //   RO[interceptAxiosId]: [
