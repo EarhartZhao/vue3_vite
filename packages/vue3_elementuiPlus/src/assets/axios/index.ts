@@ -2,7 +2,7 @@ import router from '@/router'
 import cfg from '@config/index'
 import { store } from '@store/index'
 import { exitSystem } from '@utils/system/index'
-import interceptHttp from '@utils/timeout/interceptHttp'
+import interceptAxios from '@utils/timeout/interceptAxios'
 import axios from 'axios'
 import { ElLoading, ElMessage } from 'element-plus'
 
@@ -12,9 +12,13 @@ Object.assign(axios.defaults, {
   timeout: 600000,
 });
 
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
+
 const whiteListAPI = []; // 白名单
 
-const interceptHttpRequest = interceptHttp({ throttle: 3000 })
+console.log('axios interceptors', axios.interceptors)
+const interceptAxiosRequest = interceptAxios({ throttle: 3000, axiosSource: source })
 
 // 拦截器
 axios.interceptors.request.use(
@@ -29,7 +33,7 @@ axios.interceptors.request.use(
     }
 
     // return config;
-    return interceptHttpRequest.request(config);
+    return interceptAxiosRequest.request(config);
   },
   (err) => {
     // 请求错误时的动作
@@ -41,6 +45,10 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (res) => {
     console.log("axios.interceptors.res", res);
+    // console.log("axios.interceptors.res.config", res.config);
+
+    let sendData;
+
     if (!res) {
       ElMessage(res.data.msg);
       return Promise.reject();
@@ -48,18 +56,22 @@ axios.interceptors.response.use(
     const url = res.config.url;
     if (url.indexOf(cfg.BASE_URL) > -1 || url.indexOf(cfg.UPLOAD_URL) > -1) {
       if (res.data && res.data.status === 0) {
-        return res.data.data;
+        sendData = res.data.data;
       } else {
         ElMessage(res.data.msg);
         return Promise.reject();
       }
     } else {
       //其他接口
-      return res;
+      sendData = res;
     }
+
+    return sendData;
   },
   (err) => {
-    console.log("axios err", err);
+
+    if (err.message === 'interceptAxiosCancel') return;
+
     if (err.response && err.response.status == "401") {
       ElMessage.error("用户信息失效，请重新登录");
       exitSystem();
