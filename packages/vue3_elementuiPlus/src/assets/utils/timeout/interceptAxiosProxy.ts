@@ -1,13 +1,16 @@
-import { AxiosRequestConfig } from 'axios'
-
 export type interceptAxiosProxyListStateType = "pending" | "success" | "error";
 
-interface interceptAxiosProxyListObjInterface {
-  path: string,
-  props: string,
-  dateTime: number,
-  state: interceptAxiosProxyListStateType,
-  throttle?: string,
+export interface interceptAxiosProxyListObjInterface {
+  path?: string,
+  method?: string,
+  props?: string,
+  dateTime?: number,
+  state?: interceptAxiosProxyListStateType,
+  throttle?: number,
+}
+
+export interface interceptAxiosProxyListDataInterface {
+  config: interceptAxiosProxyListObjInterface
 }
 
 // export interface interceptAxiosProxyIdArrInterface {}
@@ -16,10 +19,10 @@ export interface interceptAxiosProxyListInterface {
   [propName: string]: Array<interceptAxiosProxyListObjInterface>
 }
 
-const observableArray = new Set();
+export const observableArray = new Set();
 export const observe = (fn: Function) => observableArray.add(fn);
 
-export const interceptAxiosProxy = (data: AxiosRequestConfig) => {
+export const interceptAxiosProxy = (data: interceptAxiosProxyListDataInterface) => {
   console.log('interceptAxiosProxy data', data)
   const handle = {
     get: (target, name, receiver) => {
@@ -33,6 +36,7 @@ export const interceptAxiosProxy = (data: AxiosRequestConfig) => {
       //内部调用对应的 Reflect 方法
       const result = Reflect.set(target, key, value, receiver);
       //执行观察者队列
+      console.log('proxy set result', result)
       observableArray.forEach(item => item());
       return result;
     }

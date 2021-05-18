@@ -6,7 +6,7 @@
 
 import { AxiosRequestConfig, CancelTokenSource } from 'axios'
 
-import { interceptAxiosProxy, observe } from './interceptAxiosProxy'
+import { interceptAxiosProxy, interceptAxiosProxyListDataInterface, interceptAxiosProxyListObjInterface, observableArray, observe } from './interceptAxiosProxy'
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
@@ -30,24 +30,44 @@ class interceptAxios {
   axiosSource: CancelTokenSource;
   private list: object;
   private idArr: Array<string>;
-  private AxiosRequestRO: object;
+  private AxiosRequestRO: interceptAxiosProxyListDataInterface;
 
   constructor(options: InterceptAxiosOptionInterface) {
     this.throttle = options.throttle || 500;
     this.axiosSource = options.axiosSource;
     this.list = {};
     this.idArr = [];  //id缓存
-    this.AxiosRequestRO = interceptAxiosProxy({})
+    this.AxiosRequestRO = interceptAxiosProxy({
+      config: {}
+    })
   }
 
   request = (RO: AxiosRequestConfig): AxiosRequestConfig => {
     // const AxiosRequestRO = interceptAxiosProxy(RO)  // 代理
+
+    let config: interceptAxiosProxyListObjInterface = {};
+
+    config.path = RO.url;
+    config.props = RO.hasOwnProperty('props') ? RO.data : '';
+    config.method = RO.method;
+    config.dateTime = Date.now();
+    config.state = "pending";
+    config.throttle = this.throttle;
+
+
     console.log('request this.AxiosRequestRO 1', this.AxiosRequestRO)
-    this.AxiosRequestRO.url = RO.url;
+
+    this.AxiosRequestRO.config = config;
+
     console.log('request this.AxiosRequestRO 2', this.AxiosRequestRO)
+
     const AxiosRequestROPrint = () => {
+      // debugger
       console.log('AxiosRequestROPrint ------', this.AxiosRequestRO)
     }
+
+    console.log('observableArray', observableArray)
+
     observe(AxiosRequestROPrint)
     if (!this.idArr.includes(RO.interceptAxiosId)) {
       this.idArr.push(RO.interceptAxiosId);
@@ -59,13 +79,6 @@ class interceptAxios {
     // this.axiosSource.cancel('interceptAxiosCancel')
     console.log('ro', RO)
 
-    // console.log('this.list', this.list['TIMEOUT'])
-
-    // const data = {
-    //   RO[interceptAxiosId]: [
-
-    //   ]
-    // }
     return RO;
   }
 

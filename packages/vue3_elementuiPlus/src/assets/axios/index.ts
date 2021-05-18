@@ -69,7 +69,7 @@ axios.interceptors.response.use(
     return sendData;
   },
   (err) => {
-
+    console.log('axios error', err)
     if (err.message === 'interceptAxiosCancel') return;
 
     if (err.response && err.response.status == "401") {
