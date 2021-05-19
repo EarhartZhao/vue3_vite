@@ -18,7 +18,7 @@ const source = CancelToken.source();
 const whiteListAPI = []; // 白名单
 
 // console.log('axios interceptors', axios.interceptors)
-const interceptAxiosRequest = interceptAxios({ throttle: 3000, axiosSource: source })
+const interceptAxiosRequest = interceptAxios({ throttle: 5000, axiosSource: source })
 
 // 拦截器
 axios.interceptors.request.use(
@@ -65,7 +65,7 @@ axios.interceptors.response.use(
       //其他接口
       sendData = res;
     }
-
+    interceptAxiosRequest.response(res.config, sendData);
     return sendData;
   },
   (err) => {

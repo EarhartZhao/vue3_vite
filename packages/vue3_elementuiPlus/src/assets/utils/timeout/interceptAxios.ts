@@ -6,7 +6,7 @@
 
 import { AxiosRequestConfig, CancelTokenSource } from 'axios'
 
-import { interceptAxiosProxy, interceptAxiosProxyListDataInterface, interceptAxiosProxyListObjInterface, observableArray, observe } from './interceptAxiosProxy'
+import { interceptAxiosObserve, interceptAxiosProxy, interceptAxiosProxyListDataInterface, interceptAxiosProxyListObjInterface } from './interceptAxiosProxy'
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
@@ -19,65 +19,82 @@ declare module 'axios' {
 
 interface InterceptAxiosOptionInterface {
   throttle?: number, //是否开启节流，单位ms
+  isSaveResponseData?: boolean, // 是否缓存数据
   axiosSource?: CancelTokenSource,  //axios取消请求函数
 }
 
+const proxyOptions = (options: AxiosRequestConfig, throttle: number): interceptAxiosProxyListObjInterface => {
+  let optionsObj: any = {}
+  optionsObj.interceptAxiosId = options.interceptAxiosId;
+  optionsObj.path = options.url;
+  optionsObj.props = options.hasOwnProperty('data') ? options.data : '';
+  optionsObj.method = options.method;
+  optionsObj.dateTime = Date.now();
+  optionsObj.state = "pending";
+  optionsObj.throttle = throttle;
+  return optionsObj;
+}
+
 class interceptAxios {
-  // id: string;
-  // path: string;
-  // props?: any;
+  isSaveResponseData?: boolean;
   throttle?: number;
   axiosSource: CancelTokenSource;
   private list: object;
-  private idArr: Array<string>;
-  private AxiosRequestRO: interceptAxiosProxyListDataInterface;
+  private AxiosRequestROProxy: interceptAxiosProxyListDataInterface;
 
   constructor(options: InterceptAxiosOptionInterface) {
+    this.isSaveResponseData = options.isSaveResponseData || true;
     this.throttle = options.throttle || 500;
     this.axiosSource = options.axiosSource;
     this.list = {};
-    this.idArr = [];  //id缓存
-    this.AxiosRequestRO = interceptAxiosProxy({
-      config: {}
-    })
+    this.AxiosRequestROProxy = interceptAxiosProxy({})
+    interceptAxiosObserve(this.AxiosRequestROFunc)
   }
 
+  AxiosRequestROFunc = (config: interceptAxiosProxyListObjInterface) => {
+    if (!this.list.hasOwnProperty(config.interceptAxiosId)) {
+      this.list[config.interceptAxiosId] = [{ ...config }]
+    } else {
+      const sameListArr = this.sameListArr(config)
+      if (sameListArr.length === 0) {  // 同组没有相同数据
+        this.list[config.interceptAxiosId].push(config)
+      } else {  // 节流，取消请求
+        const intervalTime = config.dateTime - sameListArr[0].dateTime;
+        if (intervalTime < this.throttle) {
+          console.log('cancel request')
+          this.axiosSource.cancel('interceptAxiosCancel')
+        }
+      }
+
+    }
+  }
+
+  private judegSame = (ele: interceptAxiosProxyListObjInterface, config: interceptAxiosProxyListObjInterface) => ele.path === config.path && ele.method === config.method && ele.props === config.props
+  private sameListArr = (config: interceptAxiosProxyListObjInterface) => this.list[config.interceptAxiosId].filter(ele => this.judegSame(ele, config))
+
+  response = (RO: AxiosRequestConfig, data: any): void => {
+    const config = proxyOptions(RO, this.throttle)
+    console.log('response ', RO)
+    if (!this.list.hasOwnProperty(config.interceptAxiosId)) return console.log('response no data');
+    const sameListArr = this.sameListArr(config)
+    if (sameListArr.length === 0) return;
+    if (!this.isSaveResponseData) {  // 删除list缓存数据
+      this.list[config.interceptAxiosId].filter(ele => this.judegSame(ele, config))
+    } else {  // 缓存数据 data
+      sameListArr[0].state = "done";
+      sameListArr[0].saveData = data;
+    }
+    console.log('response this.list', this.list)
+  }
   request = (RO: AxiosRequestConfig): AxiosRequestConfig => {
-    // const AxiosRequestRO = interceptAxiosProxy(RO)  // 代理
 
-    let config: interceptAxiosProxyListObjInterface = {};
+    this.AxiosRequestROProxy.config = proxyOptions(RO, this.throttle)
 
-    config.path = RO.url;
-    config.props = RO.hasOwnProperty('props') ? RO.data : '';
-    config.method = RO.method;
-    config.dateTime = Date.now();
-    config.state = "pending";
-    config.throttle = this.throttle;
+    console.log('request this.AxiosRequestROProxy 1', this.AxiosRequestROProxy)
+    console.log('request this.list 1', this.list)
 
-
-    console.log('request this.AxiosRequestRO 1', this.AxiosRequestRO)
-
-    this.AxiosRequestRO.config = config;
-
-    console.log('request this.AxiosRequestRO 2', this.AxiosRequestRO)
-
-    const AxiosRequestROPrint = () => {
-      // debugger
-      console.log('AxiosRequestROPrint ------', this.AxiosRequestRO)
-    }
-
-    console.log('observableArray', observableArray)
-
-    observe(AxiosRequestROPrint)
-    if (!this.idArr.includes(RO.interceptAxiosId)) {
-      this.idArr.push(RO.interceptAxiosId);
-      this.list[RO.interceptAxiosId] = [];
-    }
-    if (!this.throttle) { }
-
-    RO.cancelToken = this.axiosSource.token;
+    // RO.cancelToken = this.axiosSource.token;
     // this.axiosSource.cancel('interceptAxiosCancel')
-    console.log('ro', RO)
 
     return RO;
   }
