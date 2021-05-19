@@ -12,8 +12,7 @@ Object.assign(axios.defaults, {
   timeout: 600000,
 });
 
-const CancelToken = axios.CancelToken;
-const source = CancelToken.source();
+const source = axios.CancelToken.source();
 
 const whiteListAPI = []; // 白名单
 

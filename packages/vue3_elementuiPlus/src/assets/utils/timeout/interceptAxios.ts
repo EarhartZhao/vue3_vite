@@ -27,7 +27,7 @@ const proxyOptions = (options: AxiosRequestConfig, throttle: number): interceptA
   let optionsObj: any = {}
   optionsObj.interceptAxiosId = options.interceptAxiosId;
   optionsObj.path = options.url;
-  optionsObj.props = options.hasOwnProperty('data') ? options.data : '';
+  optionsObj.props = options.hasOwnProperty('data') ? options.data || '' : '';
   optionsObj.method = options.method;
   optionsObj.dateTime = Date.now();
   optionsObj.state = "pending";
@@ -52,6 +52,7 @@ class interceptAxios {
   }
 
   AxiosRequestROFunc = (config: interceptAxiosProxyListObjInterface) => {
+    // this.axiosSource.cancel('interceptAxiosCancel')
     if (!this.list.hasOwnProperty(config.interceptAxiosId)) {
       this.list[config.interceptAxiosId] = [{ ...config }]
     } else {
@@ -60,8 +61,9 @@ class interceptAxios {
         this.list[config.interceptAxiosId].push(config)
       } else {  // 节流，取消请求
         const intervalTime = config.dateTime - sameListArr[0].dateTime;
+        console.log('intervalTime', intervalTime, intervalTime < this.throttle)
         if (intervalTime < this.throttle) {
-          console.log('cancel request')
+          console.log('cancel request -----, ------', this.axiosSource)
           this.axiosSource.cancel('interceptAxiosCancel')
         }
       }
@@ -69,23 +71,34 @@ class interceptAxios {
     }
   }
 
-  private judegSame = (ele: interceptAxiosProxyListObjInterface, config: interceptAxiosProxyListObjInterface) => ele.path === config.path && ele.method === config.method && ele.props === config.props
-  private sameListArr = (config: interceptAxiosProxyListObjInterface) => this.list[config.interceptAxiosId].filter(ele => this.judegSame(ele, config))
+  private judegSame = (ele: interceptAxiosProxyListObjInterface, config: interceptAxiosProxyListObjInterface) => ele.path === config.path && ele.method === config.method && ele.props === config.props;
+  private sameListArr = (config: interceptAxiosProxyListObjInterface) => this.list[config.interceptAxiosId].filter((ele: any) => this.judegSame(ele, config))
 
   response = (RO: AxiosRequestConfig, data: any): void => {
+
     const config = proxyOptions(RO, this.throttle)
-    console.log('response ', RO)
+    // console.log('response config', config)
+    // console.log('response this.list', this.list)
+    // console.log('response interceptAxiosId', this.list.hasOwnProperty(config.interceptAxiosId))
+
     if (!this.list.hasOwnProperty(config.interceptAxiosId)) return console.log('response no data');
+
     const sameListArr = this.sameListArr(config)
-    if (sameListArr.length === 0) return;
+
+    // console.log('response sameListArr', sameListArr)
+    if (sameListArr.length === 0) return console.log('response no same data');
+
     if (!this.isSaveResponseData) {  // 删除list缓存数据
-      this.list[config.interceptAxiosId].filter(ele => this.judegSame(ele, config))
+      // console.log('response delete list')
+      this.list[config.interceptAxiosId].filter((ele: any) => this.judegSame(ele, config))
     } else {  // 缓存数据 data
+      // console.log('response save list')
       sameListArr[0].state = "done";
       sameListArr[0].saveData = data;
     }
-    console.log('response this.list', this.list)
+    // console.log('response this.list', this.list)
   }
+
   request = (RO: AxiosRequestConfig): AxiosRequestConfig => {
 
     this.AxiosRequestROProxy.config = proxyOptions(RO, this.throttle)
@@ -93,7 +106,7 @@ class interceptAxios {
     console.log('request this.AxiosRequestROProxy 1', this.AxiosRequestROProxy)
     console.log('request this.list 1', this.list)
 
-    // RO.cancelToken = this.axiosSource.token;
+    RO.cancelToken = this.axiosSource.token;
     // this.axiosSource.cancel('interceptAxiosCancel')
 
     return RO;
