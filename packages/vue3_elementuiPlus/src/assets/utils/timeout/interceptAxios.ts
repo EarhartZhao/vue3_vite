@@ -40,6 +40,7 @@ class interceptAxios {
   throttle?: number;
   axiosSource: CancelTokenSource;
   private list: object;
+  private waitList: object;
   private AxiosRequestROProxy: interceptAxiosProxyListDataInterface;
 
   constructor(options: InterceptAxiosOptionInterface) {
@@ -47,6 +48,7 @@ class interceptAxios {
     this.throttle = options.throttle || 500;
     this.axiosSource = options.axiosSource;
     this.list = {};
+    this.waitList = {};
     this.AxiosRequestROProxy = interceptAxiosProxy({})
     interceptAxiosObserve(this.AxiosRequestROFunc)
   }
@@ -110,6 +112,10 @@ class interceptAxios {
     // this.axiosSource.cancel('interceptAxiosCancel')
 
     return RO;
+  }
+
+  updateWaitList = async () => {
+
   }
 
   private turnString = (data: any) => typeof (data) === 'string' ? data : String(data);
