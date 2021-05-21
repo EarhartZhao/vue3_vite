@@ -1,4 +1,4 @@
-export type interceptAxiosProxyListStateType = "pending" | "success" | "error";
+export type interceptAxiosProxyListStateType = "pending" | "done";
 
 export interface interceptAxiosProxyListObjInterface {
   interceptAxiosId: string,
@@ -8,6 +8,7 @@ export interface interceptAxiosProxyListObjInterface {
   dateTime: number,
   state: interceptAxiosProxyListStateType,
   throttle?: number,
+  isAllowRequest?: boolean,
   saveData?: any
 }
 

@@ -16,8 +16,7 @@ const source = axios.CancelToken.source();
 
 const whiteListAPI = []; // 白名单
 
-// console.log('axios interceptors', axios.interceptors)
-const interceptAxiosRequest = interceptAxios({ throttle: 5000, axiosSource: source })
+export const interceptAxiosInstance = interceptAxios({ throttle: 2000 });
 
 // 拦截器
 axios.interceptors.request.use(
@@ -32,7 +31,8 @@ axios.interceptors.request.use(
     }
 
     // return config;
-    return interceptAxiosRequest.request(config);
+    return interceptAxiosInstance.request(config);
+
   },
   (err) => {
     // 请求错误时的动作
@@ -43,7 +43,7 @@ axios.interceptors.request.use(
 // 相应拦截器
 axios.interceptors.response.use(
   (res) => {
-    // console.log("axios.interceptors.res", res);
+    console.log("axios.interceptors.res", res);
     // console.log("axios.interceptors.res.config", res.config);
 
     let sendData;
@@ -64,8 +64,8 @@ axios.interceptors.response.use(
       //其他接口
       sendData = res;
     }
-    interceptAxiosRequest.response(res.config, sendData);
-    return sendData;
+    return interceptAxiosInstance.response(res.config, sendData);
+    // return sendData;
   },
   (err) => {
     console.log('axios error', err)
