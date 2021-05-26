@@ -2,9 +2,10 @@ import router from '@/router'
 import cfg from '@config/index'
 import { store } from '@store/index'
 import { exitSystem } from '@utils/system/index'
-import interceptAxios from '@utils/timeout/interceptAxios'
 import axios from 'axios'
 import { ElLoading, ElMessage } from 'element-plus'
+// import interceptAxios from '@utils/timeout/interceptAxios'
+import interceptAxios from 'intercept-axios'
 
 // 配置axios
 Object.assign(axios.defaults, {

@@ -31,7 +31,7 @@ export const interceptAxiosProxy = (data: interceptAxiosProxyListDataInterface) 
     },
     set: (target: object, key: PropertyKey, value: any, receiver: any) => {
       const result = Reflect.set(target, key, value, receiver);
-      observableArray.forEach(item => item(target.config))
+      observableArray.forEach((item: any) => item(target.config))
       return result;
     }
   }
