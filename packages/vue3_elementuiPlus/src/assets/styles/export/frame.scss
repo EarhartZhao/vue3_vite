@@ -1,0 +1,49 @@
+@use './base.scss';
+
+.page_func {
+  // font-size: 0;
+  background-color: base.$white;
+  // border-left: 1px solid base.$grey3;
+  // border-right: 1px solid base.$grey3;
+  padding: 10px 10px 0 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+
+  .item {
+    margin: 0px 4px 10px 0px;
+  }
+
+  .el-date-editor {
+    width: 220px;
+  }
+
+  .el-input-group__prepend {
+    background-color: base.$white;
+  }
+
+  .el-checkbox {
+    display: inline-block;
+  }
+
+  &:after {
+    @extend .clearfix;
+  }
+}
+
+// 按钮组样式调整
+.table-btn-wrap {
+  .el-button {
+    padding: 5px 12px;
+    font-size: 14px;
+  }
+
+  .el-button+.el-button {
+    margin-left: 0px;
+  }
+}
+
+// 卡片样式
+.el-card__header,
+.el-card__body {
+  padding: 10px;
+}

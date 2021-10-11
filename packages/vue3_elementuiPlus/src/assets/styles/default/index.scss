@@ -1,0 +1,9 @@
+@use '../export/index.scss';
+@use '../../iconfont/iconfont.css';
+
+main,
+.main {
+  @extend .relative,
+  .h-vh-100,
+  .w-vw-100;
+}

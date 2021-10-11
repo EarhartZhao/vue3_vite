@@ -12,11 +12,13 @@
 
 ### vuex-class <https://github.com/ktsn/vuex-class>
 
-### vue3组合式api文档 <https://vue-composition-api-rfc.netlify.com/api.html>
+### vue3组合式api文档 <https://v3.cn.vuejs.org/guide/composition-api-introduction.html>
 
 ### elementUI-plus文档 <https://element-plus.gitee.io/#/zh-CN/component/installation>
 
 ### dart-sass文档 <https://www.sasscss.com/documentation>
+
+### vueTest文档 <https://next.vue-test-utils.vuejs.org/>
 
 ### 注意
 

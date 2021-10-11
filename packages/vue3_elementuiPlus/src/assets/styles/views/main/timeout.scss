@@ -1,0 +1,52 @@
+.timeoutBox {
+  .el-input {
+    width: 200px;
+  }
+
+  .timeoutFunc {
+    li {
+      display: flex;
+
+      &>* {
+        margin: 0 10px 0 0;
+      }
+    }
+  }
+
+  .timeoutShowOff {
+    display: flex;
+    background-color: #fff;
+    height: calc(100vh - 130px);
+    margin: 10px 0 0 0;
+
+    &>ul {
+      width: 50%;
+      padding: 10px;
+      box-sizing: border-box;
+      height: 100%;
+      overflow-y: scroll;
+
+      li {
+        padding: 4px;
+        background-color: #f5f6fa;
+        min-height: 24px;
+        font-size: 12px;
+        line-height: 16px;
+        margin: 0 0 10px 0;
+        cursor: pointer;
+
+        span {
+          margin: 0 20px 0 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &>ul:first-child {
+      border-right: 1px solid #f5f6fa;
+    }
+  }
+}
