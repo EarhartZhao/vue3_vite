@@ -12,6 +12,6 @@
     "@types/node": "^14.14.12"
   },
   "peerDependencies": {
-    "vue": "^3.0.5"
+    "vue": "^3.2.19"
   }
 }

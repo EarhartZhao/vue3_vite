@@ -2,7 +2,7 @@ import Mock from "./index";
 // 登录
 let Login = {
   token: "11111",
-  admin: '123123'
+  userName: 'admin'
 };
 
 export default {

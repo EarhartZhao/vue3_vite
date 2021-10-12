@@ -12,7 +12,7 @@ let concatObj = Object.assign({}, Login, Table);
 
 Mock.successResp = (obj:any) => {
   return {
-    code: 0,
+    status: 0,
     msg: "success",
     data: obj
   }

@@ -64,7 +64,6 @@ export default defineComponent({
         if (!vaild) {
           return (loading.value = false);
         }
-        return turnPage(defaultRouter);
         LOGIN.login(form)
           .then((res) => {
             saveUserData(res, () => {

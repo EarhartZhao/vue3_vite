@@ -66,6 +66,7 @@ export default defineComponent({
         // return turnPage(defaultRouter);
         LOGIN.login(form)
           .then((res) => {
+            console.log('wrap', res)
             saveUserData(res, () => {
               turnPage(defaultRouter);
               loading.value = false;
