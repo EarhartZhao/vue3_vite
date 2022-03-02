@@ -1,0 +1,57 @@
+{
+  "compilerOptions": {
+    // ...// 其他配置
+    "baseUrl": ".",
+    "target": "es2020",
+    "module": "ESNext",
+    "sourceMap": true,
+    "strict": false,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "isolatedModules": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "types": ["ant-design-vue", "axios", "vite/client", "node"],
+    "jsx": "preserve",
+    "paths": {
+      "@config/*": ["config/*"],
+      "@/*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
+      "@router/*": ["src/router/*"],
+      "@store/*": ["src/store/*"],
+      "@types/*": ["src/types/*"],
+      "@utils/*": ["src/assets/utils/*"],
+      "@comp/*": ["src/components/*"],
+      "@api/*": ["src/assets/api/*"],
+      "@icon/*": ["src/assets/iconfont/*"],
+      "@img/*": ["src/assets/images/*"],
+      "@style/*": ["src/assets/styles/*"],
+      "@styleE/*": ["src/assets/styles/export/*"],
+      "@styleV/*": ["src/assets/styles/views/*"],
+      "@styleBase/*": ["src/assets/styles/views/base/*"],
+      "@styleLayout/*": ["src/assets/styles/views/layout/*"],
+      "@styleMain/*": ["src/assets/styles/views/main/*"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/**/*.ts",
+    "src/*.tsx",
+    "src/**/*.tsx",
+    "src/**/**/*.tsx",
+    "src/**/**/**/*.tsx",
+    "src/**/**/**/**/*.tsx",
+    "src/**/*.vue",
+    "src/**/**/*.vue",
+    "src/**/**/**/*.vue",
+    "src/**/**/**/**/*.vue",
+    "src/types/images.d.ts",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "typings"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

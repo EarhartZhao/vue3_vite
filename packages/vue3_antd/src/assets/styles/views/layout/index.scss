@@ -1,0 +1,38 @@
+@use '../../export/base';
+
+$px: 10px;
+
+.scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.layout {
+  .el-header {
+    @extend .w-f,
+    .pd-0;
+    height: 50px !important;
+  }
+
+  .layout_box {
+    height: calc(100vh - 50px);
+
+    .el-aside {
+      @extend .h-f,
+      .scroll;
+      width: 180px !important;
+      background-color: base.$blue2;
+      border-top: 20px solid base.$blue2;
+      border-bottom: 20px solid base.$blue2;
+    }
+
+    .el-main {
+      width: calc(100% - 180px);
+      background-color: base.$white2;
+      @extend .h-f,
+      .pd-20,
+      .scroll;
+    }
+  }
+
+}

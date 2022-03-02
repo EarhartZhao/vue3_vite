@@ -1,0 +1,86 @@
+import router from '@/router'
+import cfg from '@config/index'
+import { store } from '@store/index'
+import { exitSystem } from '@utils/system/index'
+import axios from 'axios'
+import { message } from "ant-design-vue";
+// import interceptAxios from '@utils/timeout/interceptAxios'
+import interceptAxios from 'intercept-axios'
+
+// 配置axios
+Object.assign(axios.defaults, {
+  baseURL: cfg.BASE_URL,
+  timeout: 600000,
+});
+
+const source = axios.CancelToken.source();
+
+const whiteListAPI = []; // 白名单
+
+export const interceptAxiosInstance = interceptAxios({ throttle: 2000 });
+
+// 拦截器
+axios.interceptors.request.use(
+  (config) => {
+    if (
+      config.url.indexOf(cfg.BASE_URL) > -1 ||
+      config.url.indexOf(cfg.UPLOAD_URL) > -1
+    ) {
+      let token = store.getters["user/getToken"] || "";
+      config.headers.Authorization = token;
+    } else {
+    }
+
+    // return config;
+    return interceptAxiosInstance.request(config);
+
+  },
+  (err) => {
+    // 请求错误时的动作
+    Promise.reject(err);
+  }
+);
+
+// 相应拦截器
+axios.interceptors.response.use(
+  (res) => {
+    console.log("axios.interceptors.res", res);
+    // console.log("axios.interceptors.res.config", res.config);
+
+    let sendData;
+
+    if (!res) {
+      message.warning(res.data.msg)
+      return Promise.reject();
+    }
+    const url = res.config.url;
+    if (url.indexOf(cfg.BASE_URL) > -1 || url.indexOf(cfg.UPLOAD_URL) > -1) {
+      if (res.data && res.data.status === 0) {
+        sendData = res.data.data;
+      } else {
+        message.warning(res.data.msg)
+        return Promise.reject();
+      }
+    } else {
+      //其他接口
+      sendData = res;
+    }
+    return interceptAxiosInstance.response(res.config, sendData);
+    // return sendData;
+  },
+  (err) => {
+    console.log('axios error', err)
+    if (err.message === 'interceptAxiosCancel') return;
+
+    if (err.response && err.response.status == "401") {
+      message.error("用户信息失效，请重新登录")
+      exitSystem();
+    } else if (err.response && err.response.status == "403") {
+      message.error("没有此权限")
+    } else {
+      message.error("服务错误")
+    }
+  }
+);
+
+export { axios, cfg };

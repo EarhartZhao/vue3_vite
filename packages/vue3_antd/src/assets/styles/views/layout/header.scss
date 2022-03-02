@@ -1,0 +1,34 @@
+@use '@styleE/base';
+
+.el-header {
+  background-color: base.$white;
+  border-bottom: 1px solid base.$grey1;
+
+  .header_box {
+    @extend .flex-b-c;
+
+    .header_box_logo {
+      @extend .flex-c-c;
+      width: 180px;
+      height: 50px;
+
+      img {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 160px;
+        max-height: 30px;
+      }
+    }
+
+    .header_box_func {
+      width: base.$px50;
+      @extend .mr-10;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

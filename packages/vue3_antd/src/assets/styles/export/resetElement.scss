@@ -1,0 +1,118 @@
+@use './base';
+
+// dialog
+.el-dialog {
+  min-width: 500px;
+
+  .el-dialog__header {
+    border-bottom: 1px solid base.$grey3;
+    padding: 14px 20px 10px 20px;
+
+    .el-dialog__title {
+      font-size: 18px;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 10px 20px;
+    max-height: calc(100vh - 380px);
+    overflow-y: scroll;
+  }
+
+  .el-dialog__footer {
+    border-top: 1px solid base.$grey3;
+  }
+}
+
+// button
+.el-button {
+  padding: 7px 12px;
+  min-height: auto;
+
+  span {
+    cursor: pointer;
+  }
+}
+
+.el-button.el-button--primary {}
+
+
+// form
+.el-form {
+  .el-form-item {
+    @extend .flex-l-w,
+    .mb-16;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+
+// input
+.el-input {
+  height: 28px;
+  line-height: 28px;
+
+  .el-input__inner {
+    height: 28px;
+    line-height: 26px;
+    box-sizing: border-box;
+
+    &::placeholder {
+      line-height: 20px;
+    }
+  }
+
+  .el-input__icon {
+    line-height: 28px;
+    font-size: 12px;
+  }
+}
+
+.el-input-group {
+  display: flex;
+}
+
+.el-input-group__prepend {
+  box-sizing: border-box;
+  display: block;
+  width: auto;
+}
+
+//messageBox
+.el-message-box {
+  .el-message-box__header {}
+}
+
+// popover
+.el-popover {
+
+  .el-popconfirm {
+    max-width: 180px !important;
+
+    .el-popconfirm__main {
+      @extend .mb-6;
+    }
+  }
+
+  .header_func {
+    li {
+      cursor: pointer;
+    }
+  }
+
+  .popover_body {
+    .popover_top {
+      @extend .pd-8;
+    }
+
+    .popover_func {
+      @extend .flex-r-c,
+      .pd-4;
+      border-top: 1px solid base.$grey1;
+
+    }
+  }
+}

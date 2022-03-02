@@ -1,0 +1,426 @@
+$fonts: (0, 1, 2, 4, 5, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 30, 40, 50, 60, 70, 80, 100);
+$colors: ("white":#ffffff, "white2":#f5f6fa, "grey1":#e5e5e5, "grey2":#c1c4cb, "grey3":#b3b3b3, "grey4":#959aa2, "grey5":#808080, "grey6":#333333, "origin":#ef5800, "blue1":#2c74bc, "blue2":#545b65, "blue3":#414954, "black":#000);
+$px0: 0px;
+$px1: 1px;
+$px2: 2px;
+$px4: 4px;
+$px6: 6px;
+$px8: 8px;
+$px10: 10px;
+$px12: 12px;
+$px14: 14px;
+$px16: 16px;
+$px18: 18px;
+$px20: 20px;
+$px22: 22px;
+$px24: 24px;
+$px30: 30px;
+$px40: 40px;
+$px50: 50px;
+$px60: 60px;
+$px70: 70px;
+$px80: 80px;
+$white: #ffffff;
+$white2: #f5f6fa;
+$grey1: #e5e5e5;
+$grey2: #c1c4cb;
+$grey3: #b3b3b3;
+$grey4: #959aa2;
+$grey5: #808080;
+$grey6: #333333;
+$origin: #ef5800;
+$origin1: #f6ab2b; //官网使用字体颜色
+$blue1: #2c74bc;
+$blue2: #545b65;
+$blue3: #414954;
+$blue4: #0080ff; //官网使用蓝色
+$blue5: #d8ecff;
+$black: #000;
+$normalFonts: #1a1a1a;
+$color-first: $origin; //主要颜色
+$color-second: $blue3; //次要颜色
+$color-choose: $blue1; //选中颜色
+$color-text: $blue3; //文本颜色
+
+//数字越小，颜色越浅
+@each $header,
+$color in $colors {
+    .#{$header} {
+        color: $color;
+    }
+}
+
+//号越小，颜色越浅
+@each $font in $fonts {
+    .font-#{$font} {
+        font-size: #{$font}px;
+    }
+
+    .ptb-#{$font} {
+        padding: #{$font}px 0;
+    }
+
+    .plr-#{$font} {
+        padding: 0 #{$font}px;
+    }
+
+    .pd-#{$font} {
+        padding: #{$font}px;
+    }
+
+    .pl-#{$font} {
+        padding-left: #{$font}px;
+    }
+
+    .pr-#{$font} {
+        padding-right: #{$font}px;
+    }
+
+    .pt-#{$font} {
+        padding-top: #{$font}px;
+    }
+
+    .pb-#{$font} {
+        padding-bottom: #{$font}px;
+    }
+
+    .mtb-#{$font} {
+        margin: #{$font}px 0;
+    }
+
+    .mlr-#{$font} {
+        margin: 0 #{$font}px;
+    }
+
+    .m-#{$font} {
+        margin: #{$font}px;
+    }
+
+    .md-#{$font} {
+        margin: #{$font}px;
+    }
+
+    .ml-#{$font} {
+        margin-left: #{$font}px;
+    }
+
+    .mr-#{$font} {
+        margin-right: #{$font}px;
+    }
+
+    .mt-#{$font} {
+        margin-top: #{$font}px;
+    }
+
+    .mb-#{$font} {
+        margin-bottom: #{$font}px;
+    }
+
+    .w-#{$font} {
+        width: #{$font}px;
+    }
+
+    .w-vw-#{$font} {
+        width: #{$font}vw;
+    }
+
+    .h-#{$font} {
+        height: #{$font}px;
+    }
+
+    .h-vh-#{$font} {
+        height: #{$font}vh;
+    }
+
+    .lh-#{$font} {
+        line-height: #{$font}px;
+    }
+
+    .l-#{$font} {
+        left: #{$font}px;
+    }
+
+    .r-#{$font} {
+        right: #{$font}px;
+    }
+
+    .t-#{$font} {
+        top: #{$font}px;
+    }
+
+    .b-#{$font} {
+        bottom: #{$font}px;
+    }
+
+    .border-r-#{$font} {
+        border-radius: #{$font}px;
+    }
+}
+
+.border-r-h {
+    border-radius: 50%;
+}
+
+.align-l {
+    text-align: left;
+}
+
+.align-c {
+    text-align: center;
+}
+
+.align-r {
+    text-align: right;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.w-f {
+    width: 100%;
+}
+
+.w-h {
+    width: 50%;
+}
+
+.h-f {
+    height: 100%;
+}
+
+.h-h {
+    height: 50%;
+}
+
+.li-f {
+    line-height: 100%;
+}
+
+.block {
+    display: block;
+}
+
+.none {
+    display: none;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.clearfix,
+.clear {
+    &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// flex布局 上下居中
+.flex-l-c {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.flex-l {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.flex-r-c {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.flex-r {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex-c-c {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-c {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-b-c {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-b {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-a-c {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+// flex布局 超出换行
+.flex-l-w {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.flex-r-w {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.flex-c-w {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flex-b-w {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.flex-a-w {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.page {
+    min-width: 1200px;
+    margin: auto;
+    background-color: $white;
+}
+
+//table的盒子
+.main-box {
+    //padding-left: 40px;
+    //padding-right: 40px;
+    //
+    @extend .m-20,
+    .pb-10;
+    background-color: $white;
+
+    .el-button {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+
+    .el-button+.el-button {
+        margin-left: 0px;
+    }
+}
+
+//搜索框布局
+.searchContainerBase {
+    background-color: $white;
+    padding: 20px 20px 10px 20px;
+}
+
+.search-container-flex {
+    @extend .flex-b-c,
+    .searchContainerBase;
+}
+
+.search-container-flex-left {
+    @extend .flex-l-c,
+    .searchContainerBase;
+}
+
+.search-container-flex-right {
+    @extend .flex-r-c,
+    .searchContainerBase;
+}
+
+//页面常规按钮
+.page-nomal-btn {
+    min-width: 80px;
+    height: 30px;
+    border: 1px solid $blue3;
+    @extend .border-r-0,
+    .plr-12;
+}
+
+// 表单取消常规按钮
+.page-cancel-btn {
+    min-width: 80px;
+    height: 30px;
+    color: $white;
+    border: 1px solid $grey5;
+    background-color: $grey5;
+    @extend .border-r-0,
+    .plr-12;
+}
+
+.table_btn,
+.table_btn:hover {
+    border: none;
+    color: $blue1 !important;
+}
+
+.table_btn:hover {
+    opacity: 0.7;
+}
+
+.delete-table_btn {
+    color: $color-first !important;
+}
+
+.delete-table_btn:hover {
+    color: $color-first !important;
+    opacity: 0.7 !important;
+    ;
+}
+
+.mainBox {
+    background-color: $white;
+    padding: 30px 40px;
+    border-radius: 8px;
+}
